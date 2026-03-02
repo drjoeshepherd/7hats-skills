@@ -1,0 +1,5 @@
+﻿version: 1
+display_name: 7hats Entrepreneur
+short_description: Bet-allocation lens for hypothesis, minimum proof, and kill criteria.
+default_prompt: Use Entrepreneur lens to frame this as a bet with minimum proof, kill criteria, and allocation trade-offs.
+

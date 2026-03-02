@@ -1,0 +1,5 @@
+﻿version: 1
+display_name: 7hats Product
+short_description: Product Owner lens for direct story/mission/signal writing, scope, and prioritization clarity.
+default_prompt: Use Product Owner lens when asked to directly create a Story, Mission, or Signal with measurable outcomes and clear scope.
+

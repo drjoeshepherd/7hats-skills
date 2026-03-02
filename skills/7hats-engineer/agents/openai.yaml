@@ -1,0 +1,5 @@
+﻿version: 1
+display_name: 7hats Engineer
+short_description: Engineering lens for constraints, NFRs, and technical risk retirement.
+default_prompt: Use Engineer lens to identify system constraints, NFR impacts, dependencies, and rollback/risk considerations.
+

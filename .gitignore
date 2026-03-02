@@ -1,0 +1,5 @@
+﻿.plans/
+*.log
+Thumbs.db
+.DS_Store
+
