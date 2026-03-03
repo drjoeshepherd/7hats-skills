@@ -3,31 +3,31 @@
   "tools": [
     {
       "name": "route_hat",
-      "status": "planned",
+      "status": "reference_adapter",
       "request_schema": "docs/mcp/schemas/route_hat.request.json",
       "response_schema": "docs/mcp/schemas/route_hat.response.json"
     },
     {
       "name": "create_artifact",
-      "status": "planned",
+      "status": "reference_adapter",
       "request_schema": "docs/mcp/schemas/create_artifact.request.json",
       "response_schema": "docs/mcp/schemas/create_artifact.response.json"
     },
     {
       "name": "validate_artifact",
-      "status": "planned",
+      "status": "reference_adapter",
       "request_schema": "docs/mcp/schemas/validate_artifact.request.json",
       "response_schema": "docs/mcp/schemas/validate_artifact.response.json"
     },
     {
       "name": "list_templates",
-      "status": "planned",
+      "status": "reference_adapter",
       "request_schema": "docs/mcp/schemas/list_templates.request.json",
       "response_schema": "docs/mcp/schemas/list_templates.response.json"
     },
     {
       "name": "get_template",
-      "status": "planned",
+      "status": "reference_adapter",
       "request_schema": "docs/mcp/schemas/get_template.request.json",
       "response_schema": "docs/mcp/schemas/get_template.response.json"
     }

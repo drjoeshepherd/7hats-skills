@@ -1,0 +1,13 @@
+{
+  "request_text": "plan this mission into sprint-ready stories",
+  "artifact_type": "mission",
+  "intent": "plan",
+  "repo_context": {
+    "attached": true,
+    "mode_hint": "repo_aware",
+    "source_refs": [
+      "services/pathing/README.md",
+      "mappings/repo-map.md"
+    ]
+  }
+}

@@ -110,6 +110,7 @@ Skill-level `references/templates.md` files point to this shared library so team
 - TPM operating posture: `docs/tpm-agent-operating-guide.md`
 - Conceptual framework: `docs/the-7-hats-foundation.md`
 - Compatibility and alias policy: `docs/compatibility.md`
+- Intent-first migration notes: `docs/intent-first-migration.md`
 - MCP contract and integration docs: `docs/mcp/`
 
 ## Validation

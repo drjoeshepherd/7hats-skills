@@ -5,6 +5,9 @@ $skillsRoot = Join-Path $root "skills"
 $templatesRoot = Join-Path $root "docs\templates"
 $operatingSystemRoot = Join-Path $root "docs\operating-system"
 $scriptsRoot = Join-Path $root "scripts"
+$mcpDocsRoot = Join-Path $root "docs\mcp"
+$mcpServerRoot = Join-Path $root "mcp\server"
+$mcpTestsRoot = Join-Path $root "mcp\tests"
 
 if (-not (Test-Path $skillsRoot)) {
   throw "Missing skills directory: $skillsRoot"
@@ -63,7 +66,18 @@ $requiredSmokeScripts = @(
   "smoke-test-routing.ps1",
   "smoke-test-templates.ps1",
   "smoke-test-intent-routing.ps1",
-  "smoke-test-repo-context.ps1"
+  "smoke-test-repo-context.ps1",
+  "smoke-test-mcp-schemas.ps1"
+)
+
+$requiredAdditionalDocs = @(
+  "docs/mcp/integration-quickstart.md",
+  "docs/intent-first-migration.md"
+)
+
+$requiredMcpFiles = @(
+  "mcp/server/adapter.ps1",
+  "mcp/tests/smoke-adapter-dry-run.ps1"
 )
 
 foreach ($relativePath in $requiredTemplateFiles) {
@@ -84,6 +98,20 @@ foreach ($scriptName in $requiredSmokeScripts) {
   $fullPath = Join-Path $scriptsRoot $scriptName
   if (-not (Test-Path $fullPath)) {
     $errors += "Missing smoke script: scripts/$scriptName"
+  }
+}
+
+foreach ($docPath in $requiredAdditionalDocs) {
+  $fullPath = Join-Path $root $docPath
+  if (-not (Test-Path $fullPath)) {
+    $errors += "Missing required documentation: $docPath"
+  }
+}
+
+foreach ($filePath in $requiredMcpFiles) {
+  $fullPath = Join-Path $root $filePath
+  if (-not (Test-Path $fullPath)) {
+    $errors += "Missing required MCP implementation/test file: $filePath"
   }
 }
 

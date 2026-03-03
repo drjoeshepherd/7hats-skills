@@ -1,0 +1,7 @@
+{
+  "artifact_type": "user_story",
+  "content_format": "markdown",
+  "repo_mode": "repo_aware",
+  "intent": "validate",
+  "content": "# User Story\n\n## Title\nAs a user, I want faster load times.\n\n## Scope\nImprove web response path.\n\n## Acceptance Criteria\nGiven normal load, when user opens dashboard, then response is under 2s.\n\n## Source References\n- services/web/README.md\n- mappings/repo-map.md\n"
+}

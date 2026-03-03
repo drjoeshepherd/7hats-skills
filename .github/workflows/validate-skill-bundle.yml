@@ -26,6 +26,16 @@ jobs:
         run: |
           ./scripts/smoke-test-routing.ps1
 
+      - name: Smoke test intent routing
+        shell: pwsh
+        run: |
+          ./scripts/smoke-test-intent-routing.ps1
+
+      - name: Smoke test repo context gate
+        shell: pwsh
+        run: |
+          ./scripts/smoke-test-repo-context.ps1
+
       - name: Smoke test MCP contract placeholder
         shell: pwsh
         run: |
@@ -35,5 +45,10 @@ jobs:
         shell: pwsh
         run: |
           ./scripts/smoke-test-mcp-schemas.ps1
+
+      - name: Smoke test MCP adapter dry run
+        shell: pwsh
+        run: |
+          ./mcp/tests/smoke-adapter-dry-run.ps1
 
 

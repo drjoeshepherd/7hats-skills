@@ -1,13 +1,21 @@
-# MCP Test Stubs
+# MCP Tests
 
-These are contract-first test placeholders for upcoming MCP implementation.
+This folder contains contract-first MCP smoke coverage and adapter dry-run checks.
 
 ## Primary Contract
 
 - `docs/mcp/contract-spec.md`
 
-## Initial Test Intent
+## Test Coverage
 
-1. Ensure contract spec exists and is readable.
-2. Ensure contract map defines all v1 tool names.
-3. Ensure schema paths are declared (files can be added incrementally).
+1. `smoke-contract-placeholder.ps1`
+- Verifies baseline contract docs and tool map presence.
+
+2. `smoke-adapter-dry-run.ps1`
+- Executes the local `mcp/server/adapter.ps1` with sample payloads.
+- Verifies route determinism (`deterministic_signature`) for same input.
+- Verifies repo mode behavior (`repo_aware` vs `generic`).
+- Verifies `validate_artifact` deterministic fields.
+
+3. `payloads/*`
+- Example request payloads for route and validate scenarios.

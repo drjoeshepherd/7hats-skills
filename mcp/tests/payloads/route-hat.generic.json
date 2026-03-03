@@ -1,0 +1,9 @@
+{
+  "request_text": "clarify this feature request",
+  "artifact_type": "user_story",
+  "intent": "clarify",
+  "repo_context": {
+    "attached": false,
+    "mode_hint": "generic"
+  }
+}
