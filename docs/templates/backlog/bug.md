@@ -1,0 +1,23 @@
+# Bug Template
+
+- `Title:`
+- `Severity:` (`Blocker | Critical | Major | Minor | Trivial`)
+- `Priority:`
+- `Environment:`
+- `Affected Version/Build:`
+- `Preconditions:`
+- `Steps To Reproduce:`
+- `Expected Result:`
+- `Actual Result:`
+- `User/Business Impact:`
+- `Scope:`
+- `Out of Scope:`
+- `Assumptions:`
+- `Dependencies:`
+- `Acceptance Criteria:` (clear fix verification criteria)
+- `QA Evidence:`
+- `Technical Notes:`
+- `Source References:`
+- `Readiness Verdict: Ready | Needs Refinement`
+- `Failed Gates:` (required when `Needs Refinement`)
+- `Missing Sources:` (required when grounding is incomplete)

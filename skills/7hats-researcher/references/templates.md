@@ -1,24 +1,9 @@
-﻿# Researcher Hat Templates
+# Researcher Hat Template Source
 
-## Hypothesis Card
-- `Decision To Inform:`
-- `Assumption:`
-- `Hypothesis:`
-- `Method:`
-- `Metric + Threshold:`
-- `Review Date:`
-- `Possible Backlog Actions:`
+Use the shared template library as the source of truth:
 
-## Evidence Summary
-- `Question:`
-- `Method Used:`
-- `Findings:`
-- `Confidence Level:`
-- `Limitations:`
-- `Decision Recommendation:`
-
-## Mission/Signal Evidence Addendum
-- `Primary Uncertainty:`
-- `Minimum Proof Needed:`
-- `Kill/Proceed Trigger:`
-
+- `../../../docs/templates/README.md`
+- `../../../docs/templates/backlog/signal.md`
+- `../../../docs/templates/backlog/mission.md`
+- `../../../docs/templates/specs/research-spec.md`
+- `../../../docs/templates/backlog/feature.md`

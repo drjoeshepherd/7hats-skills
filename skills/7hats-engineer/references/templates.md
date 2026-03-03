@@ -1,23 +1,11 @@
-﻿# Engineer Hat Templates
+# Engineer Hat Template Source
 
-## Technical Constraint Card
-- `Outcome:`
-- `Primary Constraint:`
-- `Affected Systems:`
-- `NFR Targets:`
-- `Top Failure Modes:`
-- `Risk Retirement Steps:`
-- `Rollback Path:`
+Use the shared template library as the source of truth:
 
-## Dependency Map Note
-- `Upstream Dependencies:`
-- `Downstream Dependencies:`
-- `Ownership:`
-- `Coordination Risks:`
-
-## Compatibility Checklist
-- `API Contract Change: Yes/No`
-- `Schema/Data Migration Needed: Yes/No`
-- `Dual Read/Write Required: Yes/No`
-- `Fallback Strategy:`
-
+- `../../../docs/templates/README.md`
+- `../../../docs/templates/backlog/mission.md`
+- `../../../docs/templates/backlog/signal.md`
+- `../../../docs/templates/backlog/user-story.md`
+- `../../../docs/templates/backlog/feature.md`
+- `../../../docs/templates/backlog/bug.md`
+- `../../../docs/templates/specs/design-spec.md`

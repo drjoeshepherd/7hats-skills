@@ -1,18 +1,8 @@
-﻿# Designer Hat Templates
+# Designer Hat Template Source
 
-## UX Behavior Template
-- `Primary Persona:`
-- `Flow Start/End:`
-- `Success Behavior:`
-- `State Requirements:`
-  - `Loading:`
-  - `Empty:`
-  - `Error:`
-  - `Degraded/Offline:`
-- `Accessibility Requirements:`
-- `Telemetry Expectations:`
+Use the shared template library as the source of truth:
 
-## UX Acceptance Criteria Addendum
-- `Given ... When ... Then ...` for each key state.
-- Include at least one recovery-path criterion.
-
+- `../../../docs/templates/README.md`
+- `../../../docs/templates/backlog/user-story.md`
+- `../../../docs/templates/backlog/feature.md`
+- `../../../docs/templates/specs/design-spec.md`

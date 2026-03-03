@@ -1,38 +1,11 @@
-﻿# Product Hat Templates
+# Product Hat Template Source
 
-## Mission Template
-- `Title:`
-- `Problem Statement (<=255 chars):`
-- `Desired Outcome:`
-- `Success Metrics:`
-- `Scope Boundary:`
-- `Primary Hat Lens + Reason:`
-- `Bet Framing:`
-  - `Hypothesis:`
-  - `Minimum Proof:`
-  - `Kill Criteria:`
-- `Source References:`
+Use the shared template library as the source of truth:
 
-## Signal Template
-- `Title:`
-- `Problem Statement (<=255 chars):`
-- `Why Now/Urgency:`
-- `Desired Outcome:`
-- `Success Metrics:`
-- `Primary Hat Lens + Reason:`
-- `Source References:`
-
-## Story Template
-- `Title:`
-- `Scope:`
-- `Out of Scope:`
-- `Assumptions:`
-- `Dependencies:`
-- `Description:`
-- `Acceptance Criteria:`
-- `Estimate:`
-- `Priority:`
-- `QA Evidence:`
-- `Technical Notes:`
-- `Source References:`
-
+- `../../../docs/templates/README.md`
+- `../../../docs/templates/backlog/mission.md`
+- `../../../docs/templates/backlog/signal.md`
+- `../../../docs/templates/backlog/user-story.md`
+- `../../../docs/templates/backlog/feature.md`
+- `../../../docs/templates/backlog/epic.md`
+- `../../../docs/templates/backlog/customer-request.md`

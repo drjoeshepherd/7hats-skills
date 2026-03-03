@@ -1,18 +1,8 @@
-﻿# Entrepreneur Hat Templates
+# Entrepreneur Hat Template Source
 
-## Bet Card
-- `Initiative:`
-- `Hypothesis:`
-- `Minimum Proof:`
-- `Kill Criteria:`
-- `Measurement Plan:`
-- `Review Date:`
-- `Owner:`
-- `Current Exposure Level:`
+Use the shared template library as the source of truth:
 
-## Allocation Decision
-- `Decision: Increase | Hold | Reduce | Stop`
-- `Evidence Basis:`
-- `Capacity/Budget Impact:`
-- `Next Review Date:`
-
+- `../../../docs/templates/README.md`
+- `../../../docs/templates/backlog/mission.md`
+- `../../../docs/templates/backlog/epic.md`
+- `../../../docs/templates/backlog/feature.md`

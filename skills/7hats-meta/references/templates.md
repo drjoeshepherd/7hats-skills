@@ -1,22 +1,9 @@
-﻿# Meta Hat Templates
+# Meta Hat Template Source
 
-## Decision Log Entry
-- `Decision:`
-- `Owner:`
-- `Why This Decision:`
-- `Assumptions:`
-- `Risks/Dissent:`
-- `Review Date:`
+Use the shared template library as the source of truth:
 
-## Team Health Risk Note
-- `Observed Friction:`
-- `Execution Impact:`
-- `Repair Action:`
-- `Owner + Timeline:`
-
-## Meeting Closure Pattern
-- `What was decided`
-- `What was deferred`
-- `Who owns next action`
-- `When this is reviewed`
-
+- `../../../docs/templates/README.md`
+- `../../../docs/templates/backlog/mission.md`
+- `../../../docs/templates/backlog/signal.md`
+- `../../../docs/templates/backlog/user-story.md`
+- `../../../docs/templates/backlog/epic.md`

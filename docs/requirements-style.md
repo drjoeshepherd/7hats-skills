@@ -83,6 +83,21 @@ Use this hierarchy for all planning artifacts:
 
 Standalone operational Stories are allowed when no parent Signal or Mission exists. Mark them as `Operational`.
 
+## Canonical Templates (Required)
+- Use `docs/templates/README.md` as the template index.
+- Canonical backlog templates:
+  - `docs/templates/backlog/mission.md`
+  - `docs/templates/backlog/signal.md`
+  - `docs/templates/backlog/epic.md`
+  - `docs/templates/backlog/user-story.md`
+  - `docs/templates/backlog/bug.md`
+  - `docs/templates/backlog/feature.md`
+  - `docs/templates/backlog/customer-request.md`
+- Canonical spec templates:
+  - `docs/templates/specs/design-spec.md`
+  - `docs/templates/specs/research-spec.md`
+- Skill-specific template references must defer to this library (single source of truth).
+
 ## Work Item Separation Rules (Required)
 - `Mission`, `Signal`, and `Story` are different backlog levels and must not be merged in one artifact unless explicitly requested.
 - A `Mission` or `Signal` may contain many stories.

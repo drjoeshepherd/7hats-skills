@@ -2,9 +2,14 @@
 
 $root = Split-Path -Parent $PSScriptRoot
 $skillsRoot = Join-Path $root "skills"
+$templatesRoot = Join-Path $root "docs\templates"
 
 if (-not (Test-Path $skillsRoot)) {
   throw "Missing skills directory: $skillsRoot"
+}
+
+if (-not (Test-Path $templatesRoot)) {
+  throw "Missing templates directory: $templatesRoot"
 }
 
 $requiredSkills = @(
@@ -19,6 +24,26 @@ $requiredSkills = @(
 )
 
 $errors = @()
+
+$requiredTemplateFiles = @(
+  "README.md",
+  "backlog\mission.md",
+  "backlog\signal.md",
+  "backlog\epic.md",
+  "backlog\user-story.md",
+  "backlog\bug.md",
+  "backlog\feature.md",
+  "backlog\customer-request.md",
+  "specs\design-spec.md",
+  "specs\research-spec.md"
+)
+
+foreach ($relativePath in $requiredTemplateFiles) {
+  $fullPath = Join-Path $templatesRoot $relativePath
+  if (-not (Test-Path $fullPath)) {
+    $errors += "Missing template file: docs/templates/$relativePath"
+  }
+}
 
 foreach ($skill in $requiredSkills) {
   $dir = Join-Path $skillsRoot $skill

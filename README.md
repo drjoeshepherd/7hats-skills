@@ -50,6 +50,9 @@ Copy-Item -Recurse -Force "$src\7hats-*" $dst
     requirements-style.md
     definition-of-ready.md
     tpm-agent-operating-guide.md
+    templates/
+      backlog/
+      specs/
   skills/
     7hats-orchestrator/
     7hats-product/
@@ -62,6 +65,24 @@ Copy-Item -Recurse -Force "$src\7hats-*" $dst
   scripts/
     validate-skill-bundle.ps1
 ```
+
+## Template Source Of Truth
+
+All artifact templates are centralized under `docs/templates`.
+
+- Backlog artifacts:
+  - `docs/templates/backlog/mission.md`
+  - `docs/templates/backlog/signal.md`
+  - `docs/templates/backlog/epic.md`
+  - `docs/templates/backlog/user-story.md`
+  - `docs/templates/backlog/bug.md`
+  - `docs/templates/backlog/feature.md`
+  - `docs/templates/backlog/customer-request.md`
+- Specs:
+  - `docs/templates/specs/design-spec.md`
+  - `docs/templates/specs/research-spec.md`
+
+Skill-level `references/templates.md` files point to this shared library so teams can evolve templates in one place.
 
 ## Recommended Usage Pattern
 
@@ -81,6 +102,12 @@ Run package validation:
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File .\scripts\validate-skill-bundle.ps1
+```
+
+Run template smoke tests:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\smoke-test-templates.ps1
 ```
 
 ## Versioning

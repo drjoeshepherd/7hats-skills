@@ -1,21 +1,8 @@
-﻿# Marketer Hat Templates
+# Marketer Hat Template Source
 
-## Positioning Card
-- `ICP:`
-- `Urgent Problem:`
-- `Outcome Delivered:`
-- `Alternative:`
-- `Differentiator:`
+Use the shared template library as the source of truth:
 
-## Launch Readiness Checklist
-- `Narrative aligned with shipped behavior: Yes/No`
-- `Demo flow ready: Yes/No`
-- `Support objection library ready: Yes/No`
-- `Metrics dashboard ready: Yes/No`
-
-## 30/60/90 Momentum Plan
-- `Day 30 Targets:`
-- `Day 60 Targets:`
-- `Day 90 Targets:`
-- `Adjustment Trigger:`
-
+- `../../../docs/templates/README.md`
+- `../../../docs/templates/backlog/signal.md`
+- `../../../docs/templates/backlog/feature.md`
+- `../../../docs/templates/backlog/epic.md`
