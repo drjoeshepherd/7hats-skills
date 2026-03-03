@@ -50,6 +50,10 @@ Copy-Item -Recurse -Force "$src\7hats-*" $dst
     requirements-style.md
     definition-of-ready.md
     tpm-agent-operating-guide.md
+    compatibility.md
+    mcp/
+      contract-spec.md
+      schemas/
     templates/
       backlog/
       specs/
@@ -68,7 +72,6 @@ Copy-Item -Recurse -Force "$src\7hats-*" $dst
     7hats-researcher/
     7hats-designer/
     7hats-marketer/
-    7hats-entrepreneur/
     7hats-meta/
   scripts/
     validate-skill-bundle.ps1
@@ -103,6 +106,8 @@ Skill-level `references/templates.md` files point to this shared library so team
 - Readiness and artifact quality rules: `docs/requirements-style.md`, `docs/definition-of-ready.md`
 - TPM operating posture: `docs/tpm-agent-operating-guide.md`
 - Conceptual framework: `docs/the-7-hats-foundation.md`
+- Compatibility and alias policy: `docs/compatibility.md`
+- MCP contract and integration docs: `docs/mcp/`
 
 ## Validation
 
