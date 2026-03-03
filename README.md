@@ -75,6 +75,9 @@ Copy-Item -Recurse -Force "$src\7hats-*" $dst
     7hats-meta/
   scripts/
     validate-skill-bundle.ps1
+  mcp/
+    server/
+    tests/
 ```
 
 ## Template Source Of Truth
@@ -127,6 +130,12 @@ Run routing/alias smoke tests:
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File .\scripts\smoke-test-routing.ps1
+```
+
+Run MCP contract placeholder smoke test:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\mcp\tests\smoke-contract-placeholder.ps1
 ```
 
 ## Versioning
