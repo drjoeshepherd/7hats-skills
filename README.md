@@ -1,38 +1,15 @@
 ﻿# 7 Hats Skill Bundle
 
-Enterprise-ready skill bundle based on *The 7 Hats of Technical Program Managers*.
+Intent-first TPM skill system for Codex.
 
-This package contains simplified command triggers:
-- `7hats` (router)
-- `7hats-craft`
-- `7hats-research`
-- `7hats-design`
-- `7hats-engineer`
-- `7hats-market`
-- `7hats-entrepreneur`
-- `7hats-human`
+Use `7hats` to describe what you want to do. The system selects hats and internal steps automatically.
 
-## What This Package Is
+## Install
 
-This repository is a standalone distribution for TPM/Product-owner AI agent workflows.
-It includes:
-- Skill definitions (`SKILL.md`)
-- Agent UI metadata (`agents/openai.yaml`)
-- Per-skill operational references
-- Shared governance docs for requirements/readiness
+### Option 1: Use in this repo
+Run prompts directly from this workspace.
 
-## Quick Start
-
-### Option 1: Use In This Repo
-
-Use prompts with explicit skill triggers:
-- `$7hats break this Mission into stories...`
-- `$7hats-craft create a Story for...`
-- `$7hats-engineer assess architecture risks for...`
-
-### Option 2: Install Globally In Codex
-
-PowerShell:
+### Option 2: Install globally in Codex
 
 ```powershell
 $src = "c:\Projects\7hats-skills\skills"
@@ -41,112 +18,90 @@ New-Item -ItemType Directory -Force $dst | Out-Null
 Copy-Item -Recurse -Force "$src\7hats-*" $dst
 ```
 
-## Repository Structure
+## Commands
 
-```text
-7hats-skills/
-  docs/
-    the-7-hats-foundation.md
-    requirements-style.md
-    definition-of-ready.md
-    tpm-agent-operating-guide.md
-    compatibility.md
-    mcp/
-      contract-spec.md
-      schemas/
-    templates/
-      backlog/
-      specs/
-  skills/
-    7hats/
-    7hats-craft/
-    7hats-research/
-    7hats-design/
-    7hats-engineer/
-    7hats-market/
-    7hats-entrepreneur/
-    7hats-human/
-    # legacy aliases retained
-    7hats-orchestrator/
-    7hats-product/
-    7hats-researcher/
-    7hats-designer/
-    7hats-marketer/
-    7hats-meta/
-  scripts/
-    validate-skill-bundle.ps1
-  mcp/
-    server/
-    tests/
+### Primary command (recommended)
+- `7hats`
+
+### Intent commands (used through `7hats`)
+1. `clarify`: turn a fuzzy request into a bounded artifact.
+2. `plan`: break work into executable slices and sequencing.
+3. `de-risk`: identify and retire technical/delivery risk.
+4. `decide`: force explicit tradeoffs and decision criteria.
+5. `validate`: run readiness and grounding checks.
+6. `recover`: restore momentum when execution drifts.
+
+Example prompts:
+- `$7hats clarify this request into a sprint-ready Story`
+- `$7hats plan this Mission into 5 stories`
+- `$7hats de-risk this launch plan`
+- `$7hats decide between option A and B for onboarding`
+- `$7hats validate this Story before sprint commitment`
+- `$7hats recover this initiative; decisions are stalled`
+
+### Hat-specific commands (advanced)
+- `7hats-craft`
+- `7hats-research`
+- `7hats-design`
+- `7hats-engineer`
+- `7hats-market`
+- `7hats-entrepreneur`
+- `7hats-human`
+
+Use these when you want to force one lens instead of automatic routing.
+
+## Output Contract
+
+Outputs are always request-scoped:
+- Story request -> Story only
+- Mission request -> Mission only
+- Signal request -> Signal only
+- Mission/Signal breakdown -> story series only
+
+## Repo Context Behavior
+
+The system auto-detects execution context:
+- `Repo-Aware Mode`: when a real code repo is attached; responses must cite real files and align to actual architecture/code.
+- `Generic Mode`: when no repo is attached; speculative implementation details are avoided and readiness may be `Needs Refinement`.
+
+## MCP
+
+MCP contract and schemas:
+- `docs/mcp/contract-spec.md`
+- `docs/mcp/schemas/*`
+
+Integration quickstart:
+- `docs/mcp/integration-quickstart.md`
+
+Reference adapter:
+- `mcp/server/adapter.ps1`
+
+Adapter example:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\mcp\server\adapter.ps1 `
+  -Tool route_hat `
+  -RequestPath .\mcp\tests\payloads\route-hat.repo-aware.json
 ```
 
-## Template Source Of Truth
-
-All artifact templates are centralized under `docs/templates`.
-
-- Backlog artifacts:
-  - `docs/templates/backlog/mission.md`
-  - `docs/templates/backlog/signal.md`
-  - `docs/templates/backlog/epic.md`
-  - `docs/templates/backlog/user-story.md`
-  - `docs/templates/backlog/bug.md`
-  - `docs/templates/backlog/feature.md`
-  - `docs/templates/backlog/customer-request.md`
-- Specs:
-  - `docs/templates/specs/design-spec.md`
-  - `docs/templates/specs/research-spec.md`
-
-Skill-level `references/templates.md` files point to this shared library so teams can evolve templates in one place.
-
-## Recommended Usage Pattern
-
-- Use `7hats` as the default entrypoint for generic requests.
-- Use direct hat skills for explicitly scoped work.
-- Keep outputs request-scoped (`Story` vs `Mission` vs `Signal`).
-
-## Quality and Governance
-
-- Readiness and artifact quality rules: `docs/requirements-style.md`, `docs/definition-of-ready.md`
-- TPM operating posture: `docs/tpm-agent-operating-guide.md`
-- Conceptual framework: `docs/the-7-hats-foundation.md`
-- Compatibility and alias policy: `docs/compatibility.md`
-- Intent-first migration notes: `docs/intent-first-migration.md`
-- MCP contract and integration docs: `docs/mcp/`
-
-## Validation
-
-Run package validation:
+## Validate
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File .\scripts\validate-skill-bundle.ps1
-```
-
-Run template smoke tests:
-
-```powershell
 powershell -ExecutionPolicy Bypass -File .\scripts\smoke-test-templates.ps1
-```
-
-Run routing/alias smoke tests:
-
-```powershell
 powershell -ExecutionPolicy Bypass -File .\scripts\smoke-test-routing.ps1
-```
-
-Run MCP contract placeholder smoke test:
-
-```powershell
-powershell -ExecutionPolicy Bypass -File .\mcp\tests\smoke-contract-placeholder.ps1
-```
-
-Run MCP schema smoke test:
-
-```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\smoke-test-intent-routing.ps1
+powershell -ExecutionPolicy Bypass -File .\scripts\smoke-test-repo-context.ps1
 powershell -ExecutionPolicy Bypass -File .\scripts\smoke-test-mcp-schemas.ps1
+powershell -ExecutionPolicy Bypass -File .\mcp\tests\smoke-contract-placeholder.ps1
+powershell -ExecutionPolicy Bypass -File .\mcp\tests\smoke-adapter-dry-run.ps1
 ```
 
-## Versioning
+## Key Docs
 
-- Semantic versioning is tracked in `VERSION` and `CHANGELOG.md`.
-
-
+- `docs/requirements-style.md`
+- `docs/definition-of-ready.md`
+- `docs/the-7-hats-foundation.md`
+- `docs/compatibility.md`
+- `docs/intent-first-migration.md`
+- `VERSION` and `CHANGELOG.md` for releases
