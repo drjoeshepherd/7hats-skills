@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "route_hat.response",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "primary_hat",
+    "secondary_hats",
+    "constraint_classification",
+    "artifact_type",
+    "rationale",
+    "contract_version"
+  ],
+  "properties": {
+    "primary_hat": {
+      "type": "string"
+    },
+    "secondary_hats": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "constraint_classification": {
+      "type": "string"
+    },
+    "artifact_type": {
+      "type": "string",
+      "enum": [
+        "mission",
+        "signal",
+        "epic",
+        "user_story",
+        "bug",
+        "feature",
+        "design_spec",
+        "research_spec",
+        "customer_request"
+      ]
+    },
+    "rationale": {
+      "type": "string",
+      "minLength": 1
+    },
+    "contract_version": {
+      "type": "string",
+      "minLength": 1
+    }
+  }
+}

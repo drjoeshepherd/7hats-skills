@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "create_artifact.response",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "artifact_type",
+    "readiness_verdict",
+    "template_version",
+    "contract_version"
+  ],
+  "properties": {
+    "artifact_type": {
+      "type": "string",
+      "enum": [
+        "mission",
+        "signal",
+        "epic",
+        "user_story",
+        "bug",
+        "feature",
+        "design_spec",
+        "research_spec",
+        "customer_request"
+      ]
+    },
+    "content_markdown": {
+      "type": "string"
+    },
+    "content_json": {
+      "type": "object"
+    },
+    "readiness_verdict": {
+      "type": "string",
+      "enum": [
+        "Ready",
+        "Needs Refinement"
+      ]
+    },
+    "failed_gates": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "missing_sources": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "template_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "contract_version": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "allOf": [
+    {
+      "anyOf": [
+        {
+          "required": [
+            "content_markdown"
+          ]
+        },
+        {
+          "required": [
+            "content_json"
+          ]
+        }
+      ]
+    }
+  ]
+}

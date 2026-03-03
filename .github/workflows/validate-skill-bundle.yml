@@ -16,4 +16,24 @@ jobs:
         run: |
           ./scripts/validate-skill-bundle.ps1
 
+      - name: Smoke test templates
+        shell: pwsh
+        run: |
+          ./scripts/smoke-test-templates.ps1
+
+      - name: Smoke test routing and aliases
+        shell: pwsh
+        run: |
+          ./scripts/smoke-test-routing.ps1
+
+      - name: Smoke test MCP contract placeholder
+        shell: pwsh
+        run: |
+          ./mcp/tests/smoke-contract-placeholder.ps1
+
+      - name: Smoke test MCP schemas
+        shell: pwsh
+        run: |
+          ./scripts/smoke-test-mcp-schemas.ps1
+
 

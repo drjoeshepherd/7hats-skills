@@ -138,6 +138,12 @@ Run MCP contract placeholder smoke test:
 powershell -ExecutionPolicy Bypass -File .\mcp\tests\smoke-contract-placeholder.ps1
 ```
 
+Run MCP schema smoke test:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\smoke-test-mcp-schemas.ps1
+```
+
 ## Versioning
 
 - Semantic versioning is tracked in `VERSION` and `CHANGELOG.md`.
