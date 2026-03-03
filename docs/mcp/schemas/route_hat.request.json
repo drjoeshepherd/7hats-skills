@@ -11,6 +11,17 @@
       "type": "string",
       "minLength": 1
     },
+    "intent": {
+      "type": "string",
+      "enum": [
+        "clarify",
+        "plan",
+        "de-risk",
+        "decide",
+        "validate",
+        "recover"
+      ]
+    },
     "artifact_type": {
       "type": "string",
       "enum": [
@@ -27,6 +38,29 @@
     },
     "context": {
       "type": "object"
+    },
+    "repo_context": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "attached": {
+          "type": "boolean"
+        },
+        "mode_hint": {
+          "type": "string",
+          "enum": [
+            "repo_aware",
+            "generic"
+          ]
+        },
+        "source_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
     },
     "requested_alias": {
       "type": "string"

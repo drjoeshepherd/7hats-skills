@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "validate_artifact.request",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "artifact_type",
+    "content",
+    "content_format"
+  ],
+  "properties": {
+    "artifact_type": {
+      "type": "string",
+      "enum": [
+        "mission",
+        "signal",
+        "epic",
+        "user_story",
+        "bug",
+        "feature",
+        "design_spec",
+        "research_spec",
+        "customer_request"
+      ]
+    },
+    "content": {
+      "oneOf": [
+        {
+          "type": "string",
+          "minLength": 1
+        },
+        {
+          "type": "object"
+        }
+      ]
+    },
+    "content_format": {
+      "type": "string",
+      "enum": [
+        "markdown",
+        "json"
+      ]
+    },
+    "repo_mode": {
+      "type": "string",
+      "enum": [
+        "repo_aware",
+        "generic"
+      ]
+    },
+    "intent": {
+      "type": "string",
+      "enum": [
+        "clarify",
+        "plan",
+        "de-risk",
+        "decide",
+        "validate",
+        "recover"
+      ]
+    },
+    "template_version": {
+      "type": "string"
+    }
+  }
+}

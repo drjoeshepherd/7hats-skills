@@ -19,7 +19,7 @@ Out of scope:
 ## Tool Catalog (v1)
 
 1. `route_hat`
-- Purpose: classify request type and dominant constraint, return hat plan.
+- Purpose: classify request type, intent, and dominant constraint; return deterministic hat plan.
 
 2. `create_artifact`
 - Purpose: generate one request-scoped artifact using canonical template rules.
@@ -50,20 +50,35 @@ Out of scope:
 ### `route_hat` request
 - `request_text` (string, required)
 - `artifact_type` (enum, optional)
+- `intent` (enum, optional: `clarify|plan|de-risk|decide|validate|recover`)
 - `context` (object, optional)
+- `repo_context` (object, optional):
+  - `attached` (boolean)
+  - `mode_hint` (enum: `repo_aware` | `generic`)
+  - `source_refs` (array string)
 - `requested_alias` (string, optional)
 
 ### `route_hat` response
 - `primary_hat` (enum)
 - `secondary_hats` (array enum)
 - `constraint_classification` (enum)
+- `intent` (enum)
+- `repo_mode` (enum: `repo_aware` | `generic`)
 - `artifact_type` (enum)
 - `rationale` (string)
+- `routing_confidence` (enum: `low` | `medium` | `high`)
+- `deterministic_signature` (string; stable for same normalized input)
+- `orchestration_receipt` (object):
+  - `micro_steps` (array string)
+  - `handoff_sequence` (array object: `from_hat`, `to_hat`, `reason`)
+  - `guardrails` (array string)
 - `contract_version` (string)
 
 ### `create_artifact` request
 - `artifact_type` (enum, required)
 - `request_text` (string, required)
+- `intent` (enum, optional)
+- `repo_mode` (enum: `repo_aware` | `generic`, optional)
 - `source_references` (array string, optional)
 - `output_format` (enum: `markdown` | `json`, required)
 - `template_version` (string, optional)
@@ -74,8 +89,11 @@ Out of scope:
 - `content_markdown` (string, optional)
 - `content_json` (object, optional)
 - `readiness_verdict` (enum: `Ready` | `Needs Refinement`)
+- `repo_mode` (enum: `repo_aware` | `generic`)
+- `grounding_status` (enum: `grounded` | `partial` | `insufficient`)
 - `failed_gates` (array string, optional)
 - `missing_sources` (array string, optional)
+- `orchestration_receipt` (object, optional)
 - `template_version` (string)
 - `contract_version` (string)
 
@@ -83,6 +101,8 @@ Out of scope:
 - `artifact_type` (enum, required)
 - `content` (string|object, required)
 - `content_format` (enum: `markdown` | `json`, required)
+- `repo_mode` (enum: `repo_aware` | `generic`, optional)
+- `intent` (enum, optional)
 - `template_version` (string, optional)
 
 ### `validate_artifact` response
@@ -91,6 +111,8 @@ Out of scope:
 - `missing_required_fields` (array string)
 - `violations` (array string)
 - `warnings` (array string)
+- `deterministic_violations` (boolean)
+- `validation_profile` (enum: `strict` | `balanced`)
 - `contract_version` (string)
 
 ### `list_templates` response
@@ -129,6 +151,7 @@ Out of scope:
 2. Template version is explicit on template/artifact responses.
 3. Breaking changes require MAJOR bump and migration notes.
 4. Legacy aliases map at routing layer, not template layer.
+5. Deterministic route/validate fields are required in v1 for stable CI assertions.
 
 ## Non-Interference Guardrails
 
@@ -143,6 +166,7 @@ Out of scope:
 
 1. Route consistency:
 - Same input request -> stable `route_hat` result across runs.
+- Same normalized input -> same `deterministic_signature`.
 
 2. Output-scope compliance:
 - Story request never returns Mission/Signal sections.
@@ -153,6 +177,11 @@ Out of scope:
 
 4. Validation integrity:
 - Missing required fields produce deterministic violations.
+- `validate_artifact` sets `deterministic_violations=true` when violations are reproducible from schema/template contract.
+
+5. Repo context behavior:
+- `route_hat` returns `repo_mode=repo_aware` when repo context is attached.
+- `route_hat` returns `repo_mode=generic` when repo context is absent.
 
 ## Rollout Sequence
 

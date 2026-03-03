@@ -9,6 +9,24 @@
     "output_format"
   ],
   "properties": {
+    "intent": {
+      "type": "string",
+      "enum": [
+        "clarify",
+        "plan",
+        "de-risk",
+        "decide",
+        "validate",
+        "recover"
+      ]
+    },
+    "repo_mode": {
+      "type": "string",
+      "enum": [
+        "repo_aware",
+        "generic"
+      ]
+    },
     "artifact_type": {
       "type": "string",
       "enum": [

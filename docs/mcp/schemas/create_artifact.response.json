@@ -6,6 +6,8 @@
   "required": [
     "artifact_type",
     "readiness_verdict",
+    "repo_mode",
+    "grounding_status",
     "template_version",
     "contract_version"
   ],
@@ -37,6 +39,21 @@
         "Needs Refinement"
       ]
     },
+    "repo_mode": {
+      "type": "string",
+      "enum": [
+        "repo_aware",
+        "generic"
+      ]
+    },
+    "grounding_status": {
+      "type": "string",
+      "enum": [
+        "grounded",
+        "partial",
+        "insufficient"
+      ]
+    },
     "failed_gates": {
       "type": "array",
       "items": {
@@ -47,6 +64,37 @@
       "type": "array",
       "items": {
         "type": "string"
+      }
+    },
+    "orchestration_receipt": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "intent": {
+          "type": "string",
+          "enum": [
+            "clarify",
+            "plan",
+            "de-risk",
+            "decide",
+            "validate",
+            "recover"
+          ]
+        },
+        "micro_steps": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "repo_mode": {
+          "type": "string",
+          "enum": [
+            "repo_aware",
+            "generic"
+          ]
+        }
       }
     },
     "template_version": {

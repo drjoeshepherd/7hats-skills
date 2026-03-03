@@ -5,7 +5,7 @@ This folder contains durable MCP interface documentation for 7hats.
 ## Contents
 
 - `contract-spec.md`: authoritative MCP tool/interface plan and rollout contract.
-- `schemas/`: JSON schemas for MCP request/response payloads (planned).
+- `schemas/`: JSON schemas for MCP request/response payloads.
 
 ## Scope Boundary
 

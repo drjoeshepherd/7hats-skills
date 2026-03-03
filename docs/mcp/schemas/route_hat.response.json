@@ -7,8 +7,13 @@
     "primary_hat",
     "secondary_hats",
     "constraint_classification",
+    "intent",
+    "repo_mode",
     "artifact_type",
     "rationale",
+    "routing_confidence",
+    "deterministic_signature",
+    "orchestration_receipt",
     "contract_version"
   ],
   "properties": {
@@ -23,6 +28,24 @@
     },
     "constraint_classification": {
       "type": "string"
+    },
+    "intent": {
+      "type": "string",
+      "enum": [
+        "clarify",
+        "plan",
+        "de-risk",
+        "decide",
+        "validate",
+        "recover"
+      ]
+    },
+    "repo_mode": {
+      "type": "string",
+      "enum": [
+        "repo_aware",
+        "generic"
+      ]
     },
     "artifact_type": {
       "type": "string",
@@ -41,6 +64,69 @@
     "rationale": {
       "type": "string",
       "minLength": 1
+    },
+    "routing_confidence": {
+      "type": "string",
+      "enum": [
+        "low",
+        "medium",
+        "high"
+      ]
+    },
+    "deterministic_signature": {
+      "type": "string",
+      "minLength": 1
+    },
+    "orchestration_receipt": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "micro_steps",
+        "handoff_sequence",
+        "guardrails"
+      ],
+      "properties": {
+        "micro_steps": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "handoff_sequence": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "from_hat",
+              "to_hat",
+              "reason"
+            ],
+            "properties": {
+              "from_hat": {
+                "type": "string",
+                "minLength": 1
+              },
+              "to_hat": {
+                "type": "string",
+                "minLength": 1
+              },
+              "reason": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        },
+        "guardrails": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
     },
     "contract_version": {
       "type": "string",
