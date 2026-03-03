@@ -17,6 +17,8 @@ docs/templates/
   specs/
     design-spec.md
     research-spec.md
+  schemas/
+    design-brief.schema.json
 ```
 
 ## Rules
@@ -24,3 +26,4 @@ docs/templates/
 - `Mission`, `Signal`, and `User Story` templates are aligned to existing 7 Hats contracts.
 - Other templates are defined using common industry patterns and can be extended safely.
 - Keep output request-scoped to the requested artifact type.
+- Use `schemas/design-brief.schema.json` to validate JSON-shaped design brief payloads.

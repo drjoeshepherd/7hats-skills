@@ -2,6 +2,7 @@ $ErrorActionPreference = "Stop"
 
 $root = Split-Path -Parent $PSScriptRoot
 $templatesRoot = Join-Path $root "docs\templates"
+$designBriefSchemaPath = Join-Path $templatesRoot "schemas\design-brief.schema.json"
 
 if (-not (Test-Path $templatesRoot)) {
   throw "Missing templates directory: $templatesRoot"
@@ -41,7 +42,35 @@ $checks = @(
   @{
     Name = "Design Spec"
     Path = "specs\design-spec.md"
-    Required = @("Goals", "Non-Goals", "User Flows", "Accessibility Requirements", "Risks and Mitigations")
+    Required = @(
+      "## 1. Overview",
+      "Title:",
+      "Requestor:",
+      "Priority:",
+      "Target Release:",
+      "## 2. Problem Definition",
+      "Background / Context:",
+      "Problem Statement:",
+      "## 3. Desired Outcome",
+      "Goal:",
+      "User Impact:",
+      "Business Impact:",
+      "## 4. Scope",
+      "In Scope:",
+      "Out of Scope:",
+      "## 5. Experience Definition",
+      "Primary Flow:",
+      "Edge Cases (if applicable):",
+      "## 6. Dependencies",
+      "Related features / technical dependencies / blocking items",
+      "## 7. Success Criteria",
+      "How will we measure improvement?",
+      "## 8. Design Deliverables (Completed by Design)",
+      "Figma link",
+      "Components updated",
+      "Tokens impacted",
+      "Prototype annotations"
+    )
   },
   @{
     Name = "Research Spec"
@@ -69,6 +98,35 @@ foreach ($check in $checks) {
     if ($content -notmatch [regex]::Escape($field)) {
       $errors += "[$($check.Name)] Missing expected field text: $field"
     }
+  }
+}
+
+if (-not (Test-Path $designBriefSchemaPath)) {
+  $errors += "[Design Brief Schema] Missing file: docs/templates/schemas/design-brief.schema.json"
+} else {
+  try {
+    $schema = Get-Content -Raw $designBriefSchemaPath | ConvertFrom-Json
+    if ($schema.type -ne "object") {
+      $errors += "[Design Brief Schema] Root type must be object."
+    }
+    $requiredTopLevel = @(
+      "overview",
+      "problem_definition",
+      "desired_outcome",
+      "scope",
+      "experience_definition",
+      "dependencies",
+      "success_criteria",
+      "design_deliverables"
+    )
+    $schemaRequired = @($schema.required)
+    foreach ($field in $requiredTopLevel) {
+      if ($schemaRequired -notcontains $field) {
+        $errors += "[Design Brief Schema] Missing required top-level field: $field"
+      }
+    }
+  } catch {
+    $errors += "[Design Brief Schema] Invalid JSON: docs/templates/schemas/design-brief.schema.json"
   }
 }
 

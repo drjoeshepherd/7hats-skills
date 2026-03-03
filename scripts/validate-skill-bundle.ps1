@@ -51,7 +51,8 @@ $requiredTemplateFiles = @(
   "backlog\feature.md",
   "backlog\customer-request.md",
   "specs\design-spec.md",
-  "specs\research-spec.md"
+  "specs\research-spec.md",
+  "schemas\design-brief.schema.json"
 )
 
 $requiredOperatingSystemFiles = @(
