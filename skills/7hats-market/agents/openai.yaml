@@ -1,0 +1,5 @@
+﻿version: 1
+display_name: 7hats Market
+short_description: Adoption lens for positioning, launch readiness, and usage telemetry.
+default_prompt: Use Marketer lens to shape positioning, enablement needs, and adoption measurement.
+

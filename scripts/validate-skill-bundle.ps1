@@ -13,11 +13,19 @@ if (-not (Test-Path $templatesRoot)) {
 }
 
 $requiredSkills = @(
+  "7hats",
+  "7hats-craft",
+  "7hats-research",
+  "7hats-design",
+  "7hats-engineer",
+  "7hats-market",
+  "7hats-entreprenuer",
+  "7hats-human",
+  # legacy names retained
   "7hats-orchestrator",
   "7hats-product",
   "7hats-researcher",
   "7hats-designer",
-  "7hats-engineer",
   "7hats-marketer",
   "7hats-entrepreneur",
   "7hats-meta"

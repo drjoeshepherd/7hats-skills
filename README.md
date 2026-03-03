@@ -2,15 +2,15 @@
 
 Enterprise-ready skill bundle based on *The 7 Hats of Technical Program Managers*.
 
-This package contains eight Codex-compatible skills:
-- `7hats-orchestrator`
-- `7hats-product`
-- `7hats-researcher`
-- `7hats-designer`
+This package contains simplified command triggers:
+- `7hats` (router)
+- `7hats-craft`
+- `7hats-research`
+- `7hats-design`
 - `7hats-engineer`
-- `7hats-marketer`
-- `7hats-entrepreneur`
-- `7hats-meta`
+- `7hats-market`
+- `7hats-entreprenuer`
+- `7hats-human`
 
 ## What This Package Is
 
@@ -26,8 +26,8 @@ It includes:
 ### Option 1: Use In This Repo
 
 Use prompts with explicit skill triggers:
-- `$7hats-orchestrator break this Mission into stories...`
-- `$7hats-product create a Story for...`
+- `$7hats break this Mission into stories...`
+- `$7hats-craft create a Story for...`
 - `$7hats-engineer assess architecture risks for...`
 
 ### Option 2: Install Globally In Codex
@@ -54,11 +54,19 @@ Copy-Item -Recurse -Force "$src\7hats-*" $dst
       backlog/
       specs/
   skills/
+    7hats/
+    7hats-craft/
+    7hats-research/
+    7hats-design/
+    7hats-engineer/
+    7hats-market/
+    7hats-entreprenuer/
+    7hats-human/
+    # legacy aliases retained
     7hats-orchestrator/
     7hats-product/
     7hats-researcher/
     7hats-designer/
-    7hats-engineer/
     7hats-marketer/
     7hats-entrepreneur/
     7hats-meta/
@@ -86,7 +94,7 @@ Skill-level `references/templates.md` files point to this shared library so team
 
 ## Recommended Usage Pattern
 
-- Use `7hats-orchestrator` as the default entrypoint for generic requests.
+- Use `7hats` as the default entrypoint for generic requests.
 - Use direct hat skills for explicitly scoped work.
 - Keep outputs request-scoped (`Story` vs `Mission` vs `Signal`).
 

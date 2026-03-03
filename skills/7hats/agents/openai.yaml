@@ -1,0 +1,5 @@
+﻿version: 1
+display_name: 7hats
+short_description: Default router for generic Mission/Signal/Story requests when hat routing is unclear or cross-hat.
+default_prompt: For generic Mission, Signal, Story, or breakdown requests without an explicit hat, route through the best 7 Hats sequence and return only the requested artifact type with grounded sources.
+

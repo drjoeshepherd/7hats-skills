@@ -1,0 +1,5 @@
+﻿version: 1
+display_name: 7hats Design
+short_description: UX lens for states, accessibility, and behavior-level acceptance quality.
+default_prompt: Use Designer lens to define user-flow behavior, edge states, and measurable UX outcomes.
+
