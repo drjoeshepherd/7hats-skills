@@ -9,7 +9,7 @@ This package contains simplified command triggers:
 - `7hats-design`
 - `7hats-engineer`
 - `7hats-market`
-- `7hats-entreprenuer`
+- `7hats-entrepreneur`
 - `7hats-human`
 
 ## What This Package Is
@@ -60,7 +60,7 @@ Copy-Item -Recurse -Force "$src\7hats-*" $dst
     7hats-design/
     7hats-engineer/
     7hats-market/
-    7hats-entreprenuer/
+    7hats-entrepreneur/
     7hats-human/
     # legacy aliases retained
     7hats-orchestrator/
@@ -116,6 +116,12 @@ Run template smoke tests:
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File .\scripts\smoke-test-templates.ps1
+```
+
+Run routing/alias smoke tests:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\smoke-test-routing.ps1
 ```
 
 ## Versioning
