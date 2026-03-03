@@ -3,6 +3,8 @@
 $root = Split-Path -Parent $PSScriptRoot
 $skillsRoot = Join-Path $root "skills"
 $templatesRoot = Join-Path $root "docs\templates"
+$operatingSystemRoot = Join-Path $root "docs\operating-system"
+$scriptsRoot = Join-Path $root "scripts"
 
 if (-not (Test-Path $skillsRoot)) {
   throw "Missing skills directory: $skillsRoot"
@@ -10,6 +12,10 @@ if (-not (Test-Path $skillsRoot)) {
 
 if (-not (Test-Path $templatesRoot)) {
   throw "Missing templates directory: $templatesRoot"
+}
+
+if (-not (Test-Path $operatingSystemRoot)) {
+  throw "Missing operating-system docs directory: $operatingSystemRoot"
 }
 
 $requiredSkills = @(
@@ -45,10 +51,39 @@ $requiredTemplateFiles = @(
   "specs\research-spec.md"
 )
 
+$requiredOperatingSystemFiles = @(
+  "intent-taxonomy.md",
+  "routing-table.md",
+  "handoff-contract.md",
+  "trigger-schema.md",
+  "repo-context-gate.md"
+)
+
+$requiredSmokeScripts = @(
+  "smoke-test-routing.ps1",
+  "smoke-test-templates.ps1",
+  "smoke-test-intent-routing.ps1",
+  "smoke-test-repo-context.ps1"
+)
+
 foreach ($relativePath in $requiredTemplateFiles) {
   $fullPath = Join-Path $templatesRoot $relativePath
   if (-not (Test-Path $fullPath)) {
     $errors += "Missing template file: docs/templates/$relativePath"
+  }
+}
+
+foreach ($relativePath in $requiredOperatingSystemFiles) {
+  $fullPath = Join-Path $operatingSystemRoot $relativePath
+  if (-not (Test-Path $fullPath)) {
+    $errors += "Missing operating-system file: docs/operating-system/$relativePath"
+  }
+}
+
+foreach ($scriptName in $requiredSmokeScripts) {
+  $fullPath = Join-Path $scriptsRoot $scriptName
+  if (-not (Test-Path $fullPath)) {
+    $errors += "Missing smoke script: scripts/$scriptName"
   }
 }
 
@@ -75,6 +110,64 @@ foreach ($skill in $requiredSkills) {
         $errors += "Missing section '$section' in $skill"
       }
     }
+  }
+}
+
+$intentAwareSkills = @("7hats", "7hats-orchestrator")
+foreach ($skill in $intentAwareSkills) {
+  $skillPath = Join-Path $skillsRoot "$skill\SKILL.md"
+  if (Test-Path $skillPath) {
+    $content = Get-Content -Raw $skillPath
+    foreach ($requiredText in @(
+      "docs/operating-system/intent-taxonomy.md",
+      "docs/operating-system/routing-table.md",
+      "docs/operating-system/repo-context-gate.md",
+      "Repo-Aware Mode",
+      "Generic Mode"
+    )) {
+      if ($content -notmatch [regex]::Escape($requiredText)) {
+        $errors += "Missing intent/repo-context requirement '$requiredText' in $skill/ SKILL.md"
+      }
+    }
+  }
+}
+
+$canonicalContracts = Join-Path $skillsRoot "7hats\references\output-contracts.md"
+if (Test-Path $canonicalContracts) {
+  $content = Get-Content -Raw $canonicalContracts
+  foreach ($requiredText in @(
+    "## Repo Context Gate",
+    "Repo-Aware Mode",
+    "Generic Mode",
+    "Unknown - needs discovery",
+    "## Internal Scaffolding Rule"
+  )) {
+    if ($content -notmatch [regex]::Escape($requiredText)) {
+      $errors += "Missing output contract text '$requiredText' in skills/7hats/references/output-contracts.md"
+    }
+  }
+} else {
+  $errors += "Missing canonical output contracts file: skills/7hats/references/output-contracts.md"
+}
+
+$canonicalPlaybooks = @(
+  "7hats-craft\references\playbooks.md",
+  "7hats-research\references\playbooks.md",
+  "7hats-design\references\playbooks.md",
+  "7hats-engineer\references\playbooks.md",
+  "7hats-market\references\playbooks.md",
+  "7hats-entrepreneur\references\playbooks.md",
+  "7hats-human\references\playbooks.md"
+)
+foreach ($relativePath in $canonicalPlaybooks) {
+  $path = Join-Path $skillsRoot $relativePath
+  if (-not (Test-Path $path)) {
+    $errors += "Missing canonical playbook file: skills/$relativePath"
+    continue
+  }
+  $content = Get-Content -Raw $path
+  if ($content -notmatch [regex]::Escape("## Internal Micro-Steps (Callable)")) {
+    $errors += "Missing internal micro-steps section in skills/$relativePath"
   }
 }
 
