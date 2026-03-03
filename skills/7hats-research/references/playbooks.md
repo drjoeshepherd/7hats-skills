@@ -20,3 +20,10 @@
 2. Identify minimal data needed.
 3. Capture result in one-paragraph decision note.
 
+## Internal Micro-Steps (Callable)
+- `research.frame_hypothesis`: define hypothesis with measurable threshold.
+- `research.surface_assumptions`: extract and rank assumptions by decision impact.
+- `research.define_evidence_gate`: set pass/fail proof criteria.
+- `research.triage_signal`: classify noise vs durable pattern.
+- `research.force_decision`: set explicit decision trigger and review date.
+

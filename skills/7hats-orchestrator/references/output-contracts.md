@@ -55,6 +55,23 @@ Required sections:
   - `Failed Gates`
   - `Missing Sources`
 
+## Repo Context Gate
+- Determine mode at task start:
+  - `Repo-Aware Mode` when repository context is available.
+  - `Generic Mode` when repository context is unavailable.
+- Repo-Aware Mode requirements:
+  - Ground implementation claims in repository evidence.
+  - Include concrete repository file citations in `Source References`.
+  - If required citations are missing, do not mark `Ready`.
+- Generic Mode requirements:
+  - Avoid repo-specific claims.
+  - Mark unknown implementation details as `Unknown - needs discovery`.
+  - Return `Needs Refinement` when repo-specific validation is required.
+
+## Internal Scaffolding Rule
+- Internal micro-step outputs (risk maps, decision notes, matrices) are allowed during orchestration.
+- Final user output must still conform to the single requested artifact contract.
+
 ## Readiness Contract
 - Use `docs/definition-of-ready.md` as canonical DoR checklist.
 - Do not mark `Ready` when business context, technical context, or validation context is incomplete.

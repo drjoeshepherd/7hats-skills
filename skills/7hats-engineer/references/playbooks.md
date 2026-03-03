@@ -18,3 +18,10 @@
 2. Validate compatibility and migration assumptions.
 3. Define minimum pre-release checks.
 
+## Internal Micro-Steps (Callable)
+- `engineer.model_constraints`: document key NFR and operating constraints.
+- `engineer.map_failures`: list top failure modes, impact, and recovery paths.
+- `engineer.map_system`: map dependencies, boundaries, and blast radius.
+- `engineer.define_eng_done`: add survivability and operability completion checks.
+- `engineer.align_observability`: define required signals, metrics, and alert posture.
+

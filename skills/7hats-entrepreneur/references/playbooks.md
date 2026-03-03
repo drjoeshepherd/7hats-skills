@@ -13,3 +13,10 @@
 3. Increase exposure on validated bets.
 4. Archive stalled bets with explicit rationale.
 
+## Internal Micro-Steps (Callable)
+- `entrepreneur.frame_bet`: express hypothesis, upside, downside, and must-be-true.
+- `entrepreneur.allocate_capital`: map capacity and funding allocation choices.
+- `entrepreneur.enforce_evidence`: gate scaling until minimum proof is met.
+- `entrepreneur.articulate_opportunity_cost`: define what will not be done.
+- `entrepreneur.execute_stop_loss`: retire weak bets based on kill criteria.
+

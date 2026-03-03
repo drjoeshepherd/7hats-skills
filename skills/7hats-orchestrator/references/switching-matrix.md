@@ -1,5 +1,16 @@
 ﻿# Switching Matrix
 
+## Intent Routing (Primary)
+
+| Intent | Primary Hat | Typical Secondary Hats |
+| --- | --- | --- |
+| `clarify` | `7hats-craft` | `7hats-research`, `7hats-design` |
+| `plan` | `7hats-craft` | `7hats-engineer`, `7hats-research` |
+| `de-risk` | `7hats-engineer` | `7hats-research`, `7hats-design`, `7hats-entrepreneur` |
+| `decide` | `7hats-human` | `7hats-entrepreneur`, `7hats-craft`, `7hats-engineer` |
+| `validate` | `7hats-craft` | `7hats-engineer`, `7hats-design` |
+| `recover` | `7hats-human` | `7hats-craft`, `7hats-engineer`, `7hats-market` |
+
 ## Primary Routing
 
 | Condition | Primary Hat | Typical Secondary Hat |
@@ -34,4 +45,4 @@
 - Do not output multiple artifact types unless explicitly requested.
 - If grounding fails, stop and return `Needs Refinement`.
 - Keep secondary hat usage additive, not duplicative.
-
+- Intent routes are additive and must preserve canonical/legacy alias compatibility.

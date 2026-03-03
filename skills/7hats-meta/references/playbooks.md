@@ -24,3 +24,10 @@
 - Run learning review (truth, not blame).
 - Repair unresolved tensions and refresh operating norms.
 
+## Internal Micro-Steps (Callable)
+- `human.detect_drift`: detect activity/decision imbalance and ambiguity buildup.
+- `human.switch_hat`: force stance change when current lens blocks progress.
+- `human.enforce_transition`: verify ownership and context carry across handoffs.
+- `human.narrate_decision`: produce concise decision rationale and tradeoffs.
+- `human.leave_receipt`: record owner, timeline, and next review checkpoint.
+

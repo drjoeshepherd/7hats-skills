@@ -1,9 +1,9 @@
 ﻿---
-name: 7hats-orchestrator
+name: 7hats
 description: Route TPM/Product Owner work when hat selection is unclear or multi-domain, select single or multi-hat sequence, and produce request-scoped Mission, Signal, Story, or Mission/Signal story-breakdown outputs with grounded sources and readiness gates.
 ---
 
-# 7hats Orchestrator
+# 7hats
 
 Use this skill to classify request type and dominant constraint, select the right hat sequence, and return only the requested artifact type.
 
@@ -14,6 +14,11 @@ Use this skill to classify request type and dominant constraint, select the righ
 - `references/decision-framework.md`
 - `references/execution-health-dashboard.md`
 - `references/output-contracts.md`
+- `docs/operating-system/intent-taxonomy.md`
+- `docs/operating-system/routing-table.md`
+- `docs/operating-system/handoff-contract.md`
+- `docs/operating-system/trigger-schema.md`
+- `docs/operating-system/repo-context-gate.md`
 - `docs/requirements-style.md`
 - `docs/definition-of-ready.md`
 - `docs/tpm-agent-operating-guide.md`
@@ -33,12 +38,22 @@ Use this skill to classify request type and dominant constraint, select the righ
 - Available source context (files, links, service docs).
 
 ## Workflow
-1. Classify artifact type:
+1. Detect repo mode using `docs/operating-system/repo-context-gate.md`:
+- Repo-Aware Mode
+- Generic Mode
+2. Classify artifact type:
 - Story-only
 - Mission-only
 - Signal-only
 - Mission/Signal breakdown to stories
-2. Classify dominant constraint:
+3. Classify user intent from `docs/operating-system/intent-taxonomy.md`:
+- clarify
+- plan
+- de-risk
+- decide
+- validate
+- recover
+4. Classify dominant constraint:
 - Ambiguity/high unknowns
 - Backlog clarity/prioritization
 - UX friction/state design
@@ -46,12 +61,13 @@ Use this skill to classify request type and dominant constraint, select the righ
 - Adoption/enablement risk
 - Portfolio allocation/bet risk
 - Team-system/decision-health risk
-3. Select hat strategy using `references/switching-matrix.md`.
-4. Apply shared question and decision logic:
+5. Select hat strategy using `references/switching-matrix.md` and `docs/operating-system/routing-table.md`.
+6. Run internal micro-steps through hat playbooks and handoff packet rules in `docs/operating-system/handoff-contract.md`.
+7. Apply shared question and decision logic:
 - Ask the 10 core questions from `references/core-question-set.md`.
 - If conflict/uncertainty blocks progress, run `references/decision-framework.md`.
-5. Enforce output contract from `references/output-contracts.md`.
-6. Validate readiness and grounding:
+8. Enforce output contract from `references/output-contracts.md`.
+9. Validate readiness and grounding:
 - If source coverage is insufficient, return `Needs Refinement` with `Missing Sources`.
 - Keep output request-scoped (no extra artifact types).
 
@@ -60,6 +76,9 @@ Use this skill to classify request type and dominant constraint, select the righ
 - Include required sections for that type from `references/output-contracts.md`.
 - Include `Source References`.
 - Include `Readiness Verdict` and required failure fields when applicable.
+- Enforce repo mode behavior:
+  - Repo-Aware Mode must include concrete repository citations.
+  - Generic Mode must avoid repo-specific claims.
 
 ## Failure/Refinement Behavior
 - Return `Needs Refinement` when:

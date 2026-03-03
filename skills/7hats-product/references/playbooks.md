@@ -21,3 +21,10 @@
 3. Ensure each story is independently testable.
 4. Flag uncertain slices for Researcher/Engineer follow-up.
 
+## Internal Micro-Steps (Callable)
+- `craft.frame_outcome`: convert request into measurable outcome statement.
+- `craft.bound_scope`: define in-scope and out-of-scope boundaries.
+- `craft.write_acceptance`: convert criteria into binary, testable AC.
+- `craft.slice_vertical`: split oversized scope into thin vertical slices.
+- `craft.validate_readiness`: run DoR checks and mark Ready vs Needs Refinement.
+
