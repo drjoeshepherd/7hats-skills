@@ -90,12 +90,28 @@ Assert-SchemaField -SchemaName "route_hat.response.json" -RequiredFields @(
   "repo_mode",
   "routing_confidence",
   "deterministic_signature",
-  "orchestration_receipt"
+  "orchestration_receipt",
+  "reasoning_trace",
+  "trace_id",
+  "schema_version"
+)
+Assert-SchemaField -SchemaName "create_artifact.request.json" -RequiredFields @("source_references")
+Assert-SchemaField -SchemaName "create_artifact.response.json" -RequiredFields @(
+  "reasoning_trace",
+  "source_citations",
+  "next_best_action",
+  "score",
+  "required_outputs",
+  "contribution_summary",
+  "unresolved_risks",
+  "receipt"
 )
 Assert-SchemaField -SchemaName "validate_artifact.request.json" -RequiredFields @("repo_mode", "intent")
 Assert-SchemaField -SchemaName "validate_artifact.response.json" -RequiredFields @(
   "deterministic_violations",
-  "validation_profile"
+  "validation_profile",
+  "findings",
+  "score_breakdown"
 )
 
 if ($errors.Count -gt 0) {

@@ -56,8 +56,54 @@
         "source_refs": {
           "type": "array",
           "items": {
-            "type": "string",
-            "minLength": 1
+            "oneOf": [
+              {
+                "type": "string",
+                "minLength": 1
+              },
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "source",
+                  "uri"
+                ],
+                "properties": {
+                  "source": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "uri": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "locator": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "evidence_type": {
+                    "type": "string",
+                    "enum": [
+                      "architecture_doc",
+                      "service_doc",
+                      "mapping_doc",
+                      "code_path",
+                      "ticket",
+                      "runbook",
+                      "other"
+                    ]
+                  },
+                  "confidence": {
+                    "type": "string",
+                    "enum": [
+                      "low",
+                      "medium",
+                      "high"
+                    ]
+                  }
+                }
+              }
+            ]
           }
         }
       }
@@ -65,5 +111,43 @@
     "requested_alias": {
       "type": "string"
     }
-  }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "repo_context": {
+            "type": "object",
+            "properties": {
+              "mode_hint": {
+                "const": "repo_aware"
+              }
+            },
+            "required": [
+              "mode_hint"
+            ]
+          }
+        },
+        "required": [
+          "repo_context"
+        ]
+      },
+      "then": {
+        "properties": {
+          "repo_context": {
+            "type": "object",
+            "required": [
+              "source_refs"
+            ],
+            "properties": {
+              "source_refs": {
+                "type": "array",
+                "minItems": 1
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
 }

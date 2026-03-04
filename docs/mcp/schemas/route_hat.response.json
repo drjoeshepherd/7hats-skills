@@ -18,16 +18,42 @@
   ],
   "properties": {
     "primary_hat": {
-      "type": "string"
+      "type": "string",
+      "enum": [
+        "product_owner",
+        "researcher",
+        "designer",
+        "engineer",
+        "marketer",
+        "entrepreneur",
+        "meta"
+      ]
     },
     "secondary_hats": {
       "type": "array",
       "items": {
-        "type": "string"
+        "type": "string",
+        "enum": [
+          "product_owner",
+          "researcher",
+          "designer",
+          "engineer",
+          "marketer",
+          "entrepreneur",
+          "meta"
+        ]
       }
     },
     "constraint_classification": {
-      "type": "string"
+      "type": "string",
+      "enum": [
+        "ambiguity",
+        "execution_planning",
+        "risk_nfr",
+        "option_conflict",
+        "quality_gate_check",
+        "delivery_drift"
+      ]
     },
     "intent": {
       "type": "string",
@@ -127,6 +153,69 @@
           }
         }
       }
+    },
+    "reasoning_trace": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "intent_inference": {
+          "type": "string",
+          "minLength": 1
+        },
+        "constraint_classification": {
+          "type": "string",
+          "enum": [
+            "ambiguity",
+            "execution_planning",
+            "risk_nfr",
+            "option_conflict",
+            "quality_gate_check",
+            "delivery_drift"
+          ]
+        },
+        "hat_selection_rationale": {
+          "type": "string",
+          "minLength": 1
+        },
+        "decision_points": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "tradeoffs_considered": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "final_merge_rationale": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "request_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "trace_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "schema_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "tool_version": {
+      "type": "string",
+      "minLength": 1
     },
     "contract_version": {
       "type": "string",

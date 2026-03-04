@@ -47,6 +47,15 @@ Semantic versioning applies:
 - `MINOR`: additive, backward-compatible changes (new templates, optional fields, new checks).
 - `PATCH`: fixes and non-breaking clarifications.
 
+### MCP Contract Versioning Notes
+1. v1.1 introduces additive explainability and structured validation fields.
+2. Clients should treat new fields as optional unless explicitly marked required by schema.
+3. During migration, consumers may receive both:
+- legacy string issue summaries (`violations`, `warnings`)
+- structured findings objects (`findings`)
+4. Route-hat canonical response values use short hat names:
+- `product_owner`, `researcher`, `designer`, `engineer`, `marketer`, `entrepreneur`, `meta`
+
 ## Deprecation Policy
 
 1. Deprecations are announced in `CHANGELOG.md` and release notes.

@@ -72,6 +72,18 @@ Out of scope:
   - `micro_steps` (array string)
   - `handoff_sequence` (array object: `from_hat`, `to_hat`, `reason`)
   - `guardrails` (array string)
+- `reasoning_trace` (object, optional):
+  - `intent_inference`
+  - `constraint_classification`
+  - `hat_selection_rationale`
+  - `decision_points`
+  - `tradeoffs_considered`
+  - `final_merge_rationale`
+- `request_id` (string, optional)
+- `trace_id` (string, optional)
+- `created_at` (date-time string, optional)
+- `schema_version` (string, optional)
+- `tool_version` (string, optional)
 - `contract_version` (string)
 
 ### `create_artifact` request
@@ -79,10 +91,13 @@ Out of scope:
 - `request_text` (string, required)
 - `intent` (enum, optional)
 - `repo_mode` (enum: `repo_aware` | `generic`, optional)
-- `source_references` (array string, optional)
+- `source_references` (array of string or citation object, optional)
 - `output_format` (enum: `markdown` | `json`, required)
 - `template_version` (string, optional)
 - `alias` (string, optional)
+
+Repo-aware citation rule:
+- if `repo_mode=repo_aware`, `source_references` must contain at least 2 structured citation objects (`source`, `uri`).
 
 ### `create_artifact` response
 - `artifact_type` (enum)
@@ -93,7 +108,23 @@ Out of scope:
 - `grounding_status` (enum: `grounded` | `partial` | `insufficient`)
 - `failed_gates` (array string, optional)
 - `missing_sources` (array string, optional)
+- `source_citations` (array citation object, optional)
 - `orchestration_receipt` (object, optional)
+- `orchestration_receipt` collaboration fields:
+  - `required_outputs` (array string)
+  - `contribution_summary` (array: `hat`, `added`)
+  - `unresolved_risks` (array string)
+  - `receipt` (object: `status`, `summary`)
+- `reasoning_trace` (object, optional)
+- `assumptions` (array string, optional)
+- `open_questions` (array string, optional)
+- `next_best_action` (string, optional)
+- `score` (number 0-10, optional)
+- `request_id` (string, optional)
+- `trace_id` (string, optional)
+- `created_at` (date-time string, optional)
+- `schema_version` (string, optional)
+- `tool_version` (string, optional)
 - `template_version` (string)
 - `contract_version` (string)
 
@@ -108,11 +139,23 @@ Out of scope:
 ### `validate_artifact` response
 - `valid` (boolean)
 - `score` (number 0-10)
+- `score_breakdown` (object, optional)
 - `missing_required_fields` (array string)
+- `findings` (array object, optional):
+  - `code`
+  - `severity` (`error|warning|info`)
+  - `field_path`
+  - `message`
+  - `remediation`
 - `violations` (array string)
 - `warnings` (array string)
 - `deterministic_violations` (boolean)
 - `validation_profile` (enum: `strict` | `balanced`)
+- `request_id` (string, optional)
+- `trace_id` (string, optional)
+- `created_at` (date-time string, optional)
+- `schema_version` (string, optional)
+- `tool_version` (string, optional)
 - `contract_version` (string)
 
 ### `list_templates` response

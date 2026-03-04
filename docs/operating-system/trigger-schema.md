@@ -16,7 +16,7 @@ Make automated trigger logic deterministic and machine-evaluable.
   "fallback": "manual_review",
   "on_match": {
     "primary_hat": "engineer",
-    "secondary_hats": ["craft"],
+    "secondary_hats": ["product_owner"],
     "required_outputs": ["technical_notes", "acceptance_criteria_updates"]
   }
 }

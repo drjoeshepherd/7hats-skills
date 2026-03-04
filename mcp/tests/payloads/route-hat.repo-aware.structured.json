@@ -1,0 +1,18 @@
+{
+  "request_text": "de-risk this rollout with clear failure and rollback expectations",
+  "artifact_type": "mission",
+  "repo_context": {
+    "attached": true,
+    "mode_hint": "repo_aware",
+    "source_refs": [
+      {
+        "source": "Platform rollback runbook",
+        "uri": "docs/runbooks/rollback.md",
+        "locator": "Rollback sequence",
+        "evidence_type": "runbook",
+        "confidence": "high"
+      }
+    ]
+  }
+}
+

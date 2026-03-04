@@ -7,12 +7,12 @@ Map public intents to internal hat orchestration while preserving request-scoped
 
 | Intent | Primary Hat | Secondary Hats | Typical Internal Steps |
 | --- | --- | --- | --- |
-| `clarify` | Product Owner (`craft`) | Researcher, Designer | Outcome framing, scope boundaries, AC hardening |
-| `plan` | Product Owner (`craft`) | Engineer, Researcher | Vertical slicing, dependency sequencing, estimability checks |
+| `clarify` | Product Owner (`product_owner`) | Researcher, Designer | Outcome framing, scope boundaries, AC hardening |
+| `plan` | Product Owner (`product_owner`) | Engineer, Researcher | Vertical slicing, dependency sequencing, estimability checks |
 | `de-risk` | Engineer | Researcher, Designer, Entrepreneur | Constraint mapping, failure modes, evidence gates, rollback guards |
-| `decide` | Meta (`human`) | Entrepreneur, Product Owner, Engineer | Tradeoff framing, decision trigger, owner/date receipt |
-| `validate` | Product Owner (`craft`) | Engineer, Designer | DoR checks, source grounding checks, AC testability checks |
-| `recover` | Meta (`human`) | Product Owner, Engineer, Marketer | Drift diagnostics, transition enforcement, corrective sequence |
+| `decide` | Meta (`meta`) | Entrepreneur, Product Owner, Engineer | Tradeoff framing, decision trigger, owner/date receipt |
+| `validate` | Product Owner (`product_owner`) | Engineer, Designer | DoR checks, source grounding checks, AC testability checks |
+| `recover` | Meta (`meta`) | Product Owner, Engineer, Marketer | Drift diagnostics, transition enforcement, corrective sequence |
 
 ## Selection Rules
 1. Use explicit user intent if provided.

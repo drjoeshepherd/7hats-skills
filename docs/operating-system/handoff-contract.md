@@ -7,7 +7,7 @@ Define a standard internal packet for skill-to-skill handoffs across hats.
 
 ```json
 {
-  "from_hat": "craft",
+  "from_hat": "product_owner",
   "to_hat": "engineer",
   "intent": "de-risk",
   "reason": "pre-launch integration risk detected",

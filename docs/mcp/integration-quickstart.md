@@ -14,6 +14,38 @@ Provide a practical integration path for MCP-capable clients using the 7hats int
 3. `validate_artifact`: run deterministic contract checks.
 4. `list_templates` / `get_template`: template discovery and retrieval.
 
+## Contract Migration Notes (v1.0 -> v1.1)
+The v1.1 contract adds explainability, collaboration receipt, and structured validation/citation fields.
+
+Additive fields (backward-compatible):
+- `route_hat.response`:
+  - `reasoning_trace`
+  - `request_id`, `trace_id`, `created_at`, `schema_version`, `tool_version`
+- `create_artifact.response`:
+  - `source_citations`
+  - `assumptions`, `open_questions`, `next_best_action`, `score`
+  - `reasoning_trace`
+  - expanded `orchestration_receipt` with collaboration fields
+  - `request_id`, `trace_id`, `created_at`, `schema_version`, `tool_version`
+- `validate_artifact.response`:
+  - `score_breakdown`
+  - `findings`
+  - `request_id`, `trace_id`, `created_at`, `schema_version`, `tool_version`
+
+Behavior changes:
+1. Canonical hat enums in route/provenance responses:
+- `product_owner|researcher|designer|engineer|marketer|entrepreneur|meta`
+2. `constraint_classification` now maps to:
+- `ambiguity|execution_planning|risk_nfr|option_conflict|quality_gate_check|delivery_drift`
+3. In `repo_aware` create requests, `source_references` should be structured citation objects (source + uri), minimum 2.
+
+Consumer upgrade steps:
+1. Accept and persist new optional metadata fields.
+2. Prefer `findings` over legacy `violations/warnings` strings for automation.
+3. Update route-hat enum handling to canonical book hat values.
+4. Send structured citations for repo-aware artifact generation.
+5. Keep fallback handling for legacy fields during transition window.
+
 ## Example: Repo-Aware Route
 
 ```json
@@ -79,3 +111,13 @@ Run:
 - `scripts/smoke-test-repo-context.ps1`
 - `scripts/smoke-test-mcp-schemas.ps1`
 - `mcp/tests/smoke-adapter-dry-run.ps1`
+
+## Pilot Metrics
+For pilot measurement, collect MCP responses in JSONL and run:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\measure-mcp-output-quality.ps1 -InputJsonlPath .\mcp\tests\artifacts\sample-responses.jsonl
+```
+
+Metric definitions:
+- `docs/operating-system/output-quality-metrics.md`

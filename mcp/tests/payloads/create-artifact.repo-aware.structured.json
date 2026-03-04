@@ -1,0 +1,24 @@
+{
+  "artifact_type": "user_story",
+  "request_text": "Create a sprint-ready user story for improving dashboard load reliability.",
+  "intent": "plan",
+  "repo_mode": "repo_aware",
+  "output_format": "json",
+  "source_references": [
+    {
+      "source": "Dashboard service architecture",
+      "uri": "docs/architecture/dashboard-service.md",
+      "locator": "Performance Constraints",
+      "evidence_type": "architecture_doc",
+      "confidence": "high"
+    },
+    {
+      "source": "Web app route map",
+      "uri": "mappings/repo-map.md",
+      "locator": "Dashboard Route",
+      "evidence_type": "mapping_doc",
+      "confidence": "medium"
+    }
+  ]
+}
+

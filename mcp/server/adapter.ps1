@@ -83,6 +83,19 @@ function Get-ArtifactType {
   return "user_story"
 }
 
+function Get-ConstraintClassification {
+  param([string]$Intent)
+  switch ($Intent) {
+    "clarify" { return "ambiguity" }
+    "plan" { return "execution_planning" }
+    "de-risk" { return "risk_nfr" }
+    "decide" { return "option_conflict" }
+    "validate" { return "quality_gate_check" }
+    "recover" { return "delivery_drift" }
+    default { return "ambiguity" }
+  }
+}
+
 function Get-DeterministicSignature {
   param([string]$Value)
   $sha = [System.Security.Cryptography.SHA256]::Create()
@@ -97,54 +110,98 @@ function Get-HatPlan {
   switch ($Intent) {
     "clarify" {
       return @{
-        primary = "7hats-craft"
-        secondary = @("7hats-research", "7hats-design")
+        primary = "product_owner"
+        secondary = @("researcher", "designer")
         micro = @("craft.frame_outcome", "craft.bound_scope", "craft.write_acceptance")
       }
     }
     "plan" {
       return @{
-        primary = "7hats-craft"
-        secondary = @("7hats-engineer", "7hats-research")
+        primary = "product_owner"
+        secondary = @("engineer", "researcher")
         micro = @("craft.slice_vertical", "engineer.map_system", "craft.validate_readiness")
       }
     }
     "de-risk" {
       return @{
-        primary = "7hats-engineer"
-        secondary = @("7hats-research", "7hats-design", "7hats-entrepreneur")
+        primary = "engineer"
+        secondary = @("researcher", "designer", "entrepreneur")
         micro = @("engineer.model_constraints", "engineer.map_failures", "research.define_evidence_gate")
       }
     }
     "decide" {
       return @{
-        primary = "7hats-human"
-        secondary = @("7hats-entrepreneur", "7hats-craft", "7hats-engineer")
+        primary = "meta"
+        secondary = @("entrepreneur", "product_owner", "engineer")
         micro = @("human.narrate_decision", "entrepreneur.articulate_opportunity_cost", "human.leave_receipt")
       }
     }
     "validate" {
       return @{
-        primary = "7hats-craft"
-        secondary = @("7hats-engineer", "7hats-design")
+        primary = "product_owner"
+        secondary = @("engineer", "designer")
         micro = @("craft.validate_readiness", "engineer.define_eng_done", "design.map_experience_states")
       }
     }
     "recover" {
       return @{
-        primary = "7hats-human"
-        secondary = @("7hats-craft", "7hats-engineer", "7hats-market")
+        primary = "meta"
+        secondary = @("product_owner", "engineer", "marketer")
         micro = @("human.detect_drift", "human.enforce_transition", "market.monitor_post_launch_signal")
       }
     }
     default {
       return @{
-        primary = "7hats-craft"
-        secondary = @("7hats-research")
+        primary = "product_owner"
+        secondary = @("researcher")
         micro = @("craft.frame_outcome")
       }
     }
   }
+}
+
+function Normalize-SourceRefs {
+  param([object[]]$Refs)
+  $normalized = @()
+  foreach ($ref in @($Refs)) {
+    if ($null -eq $ref) { continue }
+    if ($ref -is [string]) {
+      if (-not [string]::IsNullOrWhiteSpace($ref)) {
+        $normalized += @{
+          source = $ref
+          uri = $ref
+          evidence_type = "other"
+          confidence = "medium"
+        }
+      }
+      continue
+    }
+    if ($ref.PSObject.Properties.Name -contains "source" -and $ref.PSObject.Properties.Name -contains "uri") {
+      $normalized += @{
+        source = [string]$ref.source
+        uri = [string]$ref.uri
+        locator = (Coalesce-String -Value $ref.locator -Fallback "")
+        evidence_type = (Coalesce-String -Value $ref.evidence_type -Fallback "other")
+        confidence = (Coalesce-String -Value $ref.confidence -Fallback "medium")
+      }
+    }
+  }
+  return $normalized
+}
+
+function Test-StructuredCitations {
+  param([object[]]$Refs)
+  $items = @($Refs)
+  if ($items.Count -lt 2) { return $false }
+  foreach ($ref in $items) {
+    if ($null -eq $ref) { return $false }
+    if ($ref -is [string]) { return $false }
+    if (-not ($ref.PSObject.Properties.Name -contains "source")) { return $false }
+    if (-not ($ref.PSObject.Properties.Name -contains "uri")) { return $false }
+    if ([string]::IsNullOrWhiteSpace([string]$ref.source)) { return $false }
+    if ([string]::IsNullOrWhiteSpace([string]$ref.uri)) { return $false }
+  }
+  return $true
 }
 
 function Get-TemplateMap {
@@ -176,6 +233,7 @@ function Invoke-RouteHat {
   $repoMode = Get-RepoMode -Request $Request
   $artifactType = Get-ArtifactType -Request $Request
   $plan = Get-HatPlan -Intent $intent
+  $constraint = Get-ConstraintClassification -Intent $intent
 
   $requestText = Coalesce-String -Value $Request.request_text -Fallback ""
   $sourceText = "{0}|{1}|{2}|{3}" -f $requestText, $intent, $artifactType, $repoMode
@@ -184,7 +242,7 @@ function Invoke-RouteHat {
   return @{
     primary_hat = $plan.primary
     secondary_hats = $plan.secondary
-    constraint_classification = $intent
+    constraint_classification = $constraint
     intent = $intent
     repo_mode = $repoMode
     artifact_type = $artifactType
@@ -205,6 +263,27 @@ function Invoke-RouteHat {
         "repo-context-gate-enforced"
       )
     }
+    reasoning_trace = @{
+      intent_inference = "Intent selected using explicit input when present, else deterministic keyword rules."
+      constraint_classification = $constraint
+      hat_selection_rationale = "Primary and secondary hats selected from routing table for '$intent'."
+      decision_points = @(
+        "Determine intent",
+        "Determine repo mode",
+        "Select primary hat",
+        "Select secondary hats"
+      )
+      tradeoffs_considered = @(
+        "specificity_vs_speed",
+        "strictness_vs_flexibility"
+      )
+      final_merge_rationale = "Return request-scoped route with deterministic signature and guardrails."
+    }
+    request_id = [guid]::NewGuid().ToString()
+    trace_id = [guid]::NewGuid().ToString()
+    created_at = [DateTime]::UtcNow.ToString("o")
+    schema_version = "1.1"
+    tool_version = "adapter-1.1"
     contract_version = $contractVersion
   }
 }
@@ -215,13 +294,27 @@ function Invoke-CreateArtifact {
   $repoMode = Get-RepoMode -Request $Request
   $artifactType = Get-ArtifactType -Request $Request
   $outputFormat = if (Has-Key $Request "output_format") { $Request.output_format } else { "markdown" }
+  $constraint = Get-ConstraintClassification -Intent $intent
   $sourceRefs = @()
   if (Has-Key $Request "source_references" -and $Request.source_references -ne $null) {
     $sourceRefs = @($Request.source_references)
   }
+  $normalizedRefs = @(Normalize-SourceRefs -Refs $sourceRefs)
+  $hasStrictCitations = Test-StructuredCitations -Refs $sourceRefs
 
-  $groundingStatus = if ($repoMode -eq "repo_aware" -and $sourceRefs.Count -lt 2) { "insufficient" } elseif ($sourceRefs.Count -ge 2) { "grounded" } else { "partial" }
-  $readiness = if ($groundingStatus -eq "insufficient") { "Needs Refinement" } else { "Ready" }
+  $failedGates = @()
+  if ($repoMode -eq "repo_aware" -and $normalizedRefs.Count -lt 2) {
+    $failedGates += "Grounding"
+  }
+  if ($repoMode -eq "repo_aware" -and -not $hasStrictCitations) {
+    $failedGates += "Citation Format"
+  }
+
+  $groundingStatus = if ($repoMode -eq "repo_aware" -and $failedGates.Count -gt 0) { "insufficient" } elseif ($normalizedRefs.Count -ge 2) { "grounded" } else { "partial" }
+  $readiness = if ($failedGates.Count -gt 0) { "Needs Refinement" } else { "Ready" }
+  $plan = Get-HatPlan -Intent $intent
+  $primaryHat = $plan.primary
+  $secondaryHat = ($plan.secondary | Select-Object -First 1)
 
   $requestText = Coalesce-String -Value $Request.request_text -Fallback "Generated artifact content."
   $markdown = @"
@@ -232,7 +325,7 @@ $requestText
 
 ## Source References
 $(
-  if ($sourceRefs.Count -gt 0) { ($sourceRefs | ForEach-Object { "- $_" }) -join "`n" } else { "- Unknown - needs discovery" }
+  if ($normalizedRefs.Count -gt 0) { ($normalizedRefs | ForEach-Object { "- $($_.source)" }) -join "`n" } else { "- Unknown - needs discovery" }
 )
 "@
 
@@ -240,7 +333,7 @@ $(
     artifact_type = $artifactType
     intent = $intent
     summary = (Coalesce-String -Value $Request.request_text -Fallback "")
-    source_references = $sourceRefs
+    source_references = $normalizedRefs
   }
 
   $response = @{
@@ -252,14 +345,78 @@ $(
     contract_version = $contractVersion
     orchestration_receipt = @{
       intent = $intent
-      micro_steps = (Get-HatPlan -Intent $intent).micro
+      micro_steps = $plan.micro
       repo_mode = $repoMode
+      required_outputs = @(
+        "readiness_verdict",
+        "source_citations",
+        "reasoning_trace",
+        "acceptance_scope"
+      )
+      contribution_summary = @(
+        @{
+          hat = $primaryHat
+          added = "Primary artifact framing and readiness verdict."
+        },
+        @{
+          hat = $secondaryHat
+          added = "Constraint coverage and risk shaping for artifact quality."
+        }
+      )
+      unresolved_risks = @(
+        if ($failedGates.Count -gt 0) {
+          "Repo-aware citation requirements are not fully satisfied."
+        }
+      ) | Where-Object { $_ -ne $null }
+      receipt = @{
+        status = if ($readiness -eq "Ready") { "complete" } else { "partial" }
+        summary = if ($readiness -eq "Ready") { "All required collaboration outputs were produced." } else { "Artifact generated with remaining citation/grounding gaps." }
+      }
     }
+    source_citations = $normalizedRefs
+    assumptions = @("Routing and validation profiles follow default v1.1 policies.")
+    open_questions = @(
+      if ($repoMode -eq "repo_aware" -and $normalizedRefs.Count -lt 2) {
+        "Can you provide at least two concrete repo references?"
+      }
+      if ($repoMode -eq "repo_aware" -and -not $hasStrictCitations) {
+        "Can you provide references as structured citation objects (source + uri)?"
+      }
+    ) | Where-Object { $_ -ne $null }
+    next_best_action = if ($readiness -eq "Ready") { "Proceed to implementation planning." } else { "Provide missing repo references and rerun artifact generation." }
+    score = if ($readiness -eq "Ready") { 9.0 } else { 6.5 }
+    reasoning_trace = @{
+      intent_inference = "Create-artifact invoked with deterministic intent selection."
+      constraint_classification = $constraint
+      hat_selection_rationale = "Artifact generation follows intent-first hat plan."
+      handoff_sequence = @(
+        @{
+          from_hat = $primaryHat
+          to_hat = $secondaryHat
+          reason = "Secondary constraint coverage."
+        }
+      )
+      decision_points = @("evaluate_grounding", "set_readiness_verdict", "render_output_format")
+      tradeoffs_considered = @("speed_vs_grounding_depth", "strictness_vs_progress")
+      final_merge_rationale = "Return one request-scoped artifact with readiness and source evidence."
+    }
+    request_id = [guid]::NewGuid().ToString()
+    trace_id = [guid]::NewGuid().ToString()
+    created_at = [DateTime]::UtcNow.ToString("o")
+    schema_version = "1.1"
+    tool_version = "adapter-1.1"
   }
 
-  if ($readiness -eq "Needs Refinement") {
-    $response.failed_gates = @("Grounding")
-    $response.missing_sources = @("At least two concrete repo references are required in repo_aware mode.")
+  if ($failedGates.Count -gt 0) {
+    $response.failed_gates = $failedGates
+    $response.missing_sources = @(
+      if ($repoMode -eq "repo_aware" -and $normalizedRefs.Count -lt 2) {
+        "At least two concrete repo references are required in repo_aware mode."
+      }
+      if ($repoMode -eq "repo_aware" -and -not $hasStrictCitations) {
+        "Repo-aware mode requires structured citation objects with source and uri."
+      }
+    ) | Where-Object { $_ -ne $null }
   }
 
   if ($outputFormat -eq "json") {
@@ -320,7 +477,24 @@ function Invoke-ValidateArtifact {
   return @{
     valid = $valid
     score = $score
+    score_breakdown = @{
+      structure_compliance = if ($valid) { 9.5 } else { 7.0 }
+      repo_grounding_and_citations = if ($repoMode -eq "repo_aware" -and $missing.Count -gt 0) { 6.0 } else { 9.0 }
+      acceptance_criteria_testability = if ($missing.Count -gt 0) { 7.0 } else { 9.0 }
+      clarity_and_esl_readability = 9.0
+    }
     missing_required_fields = $missing
+    findings = @(
+      foreach ($field in $missing) {
+        @{
+          code = "MISSING_REQUIRED_FIELD"
+          severity = "error"
+          field_path = "/content"
+          message = "Missing required field: $field"
+          remediation = "Add '$field' to artifact content and rerun validation."
+        }
+      }
+    )
     violations = @(
       if ($missing.Count -gt 0) { "Missing required fields for $artifactType validation profile." }
     ) | Where-Object { $_ -ne $null }
@@ -330,6 +504,11 @@ function Invoke-ValidateArtifact {
     ) | Where-Object { $_ -ne $null }
     deterministic_violations = $true
     validation_profile = "strict"
+    request_id = [guid]::NewGuid().ToString()
+    trace_id = [guid]::NewGuid().ToString()
+    created_at = [DateTime]::UtcNow.ToString("o")
+    schema_version = "1.1"
+    tool_version = "adapter-1.1"
     contract_version = $contractVersion
   }
 }

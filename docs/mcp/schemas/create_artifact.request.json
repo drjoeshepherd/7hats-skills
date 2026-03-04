@@ -48,7 +48,54 @@
     "source_references": {
       "type": "array",
       "items": {
-        "type": "string"
+        "oneOf": [
+          {
+            "type": "string",
+            "minLength": 1
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "source",
+              "uri"
+            ],
+            "properties": {
+              "source": {
+                "type": "string",
+                "minLength": 1
+              },
+              "uri": {
+                "type": "string",
+                "minLength": 1
+              },
+              "locator": {
+                "type": "string",
+                "minLength": 1
+              },
+              "evidence_type": {
+                "type": "string",
+                "enum": [
+                  "architecture_doc",
+                  "service_doc",
+                  "mapping_doc",
+                  "code_path",
+                  "ticket",
+                  "runbook",
+                  "other"
+                ]
+              },
+              "confidence": {
+                "type": "string",
+                "enum": [
+                  "low",
+                  "medium",
+                  "high"
+                ]
+              }
+            }
+          }
+        ]
       }
     },
     "output_format": {
@@ -64,5 +111,72 @@
     "alias": {
       "type": "string"
     }
-  }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "repo_mode": {
+            "const": "repo_aware"
+          }
+        },
+        "required": [
+          "repo_mode"
+        ]
+      },
+      "then": {
+        "required": [
+          "source_references"
+        ],
+        "properties": {
+          "source_references": {
+            "type": "array",
+            "minItems": 2,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "source",
+                "uri"
+              ],
+              "properties": {
+                "source": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "uri": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "locator": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "evidence_type": {
+                  "type": "string",
+                  "enum": [
+                    "architecture_doc",
+                    "service_doc",
+                    "mapping_doc",
+                    "code_path",
+                    "ticket",
+                    "runbook",
+                    "other"
+                  ]
+                },
+                "confidence": {
+                  "type": "string",
+                  "enum": [
+                    "low",
+                    "medium",
+                    "high"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
 }

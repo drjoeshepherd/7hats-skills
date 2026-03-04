@@ -22,10 +22,76 @@
       "minimum": 0,
       "maximum": 10
     },
+    "score_breakdown": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "structure_compliance": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 10
+        },
+        "repo_grounding_and_citations": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 10
+        },
+        "acceptance_criteria_testability": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 10
+        },
+        "clarity_and_esl_readability": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 10
+        }
+      }
+    },
     "missing_required_fields": {
       "type": "array",
       "items": {
         "type": "string"
+      }
+    },
+    "findings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "code",
+          "severity",
+          "field_path",
+          "message",
+          "remediation"
+        ],
+        "properties": {
+          "code": {
+            "type": "string",
+            "minLength": 1
+          },
+          "severity": {
+            "type": "string",
+            "enum": [
+              "error",
+              "warning",
+              "info"
+            ]
+          },
+          "field_path": {
+            "type": "string",
+            "minLength": 1
+          },
+          "message": {
+            "type": "string",
+            "minLength": 1
+          },
+          "remediation": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
       }
     },
     "violations": {
@@ -49,6 +115,26 @@
         "strict",
         "balanced"
       ]
+    },
+    "request_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "trace_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "schema_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "tool_version": {
+      "type": "string",
+      "minLength": 1
     },
     "contract_version": {
       "type": "string",
