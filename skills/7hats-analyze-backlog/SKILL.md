@@ -1,4 +1,4 @@
-﻿---
+---
 name: 7hats-analyze-backlog
 description: Analyze backlog sets (including CSV exports) to uncover themes, ambiguity, dependency conflicts, risk clusters, and readiness gaps, then recommend next actions for slicing or artifact creation.
 ---

@@ -1,4 +1,4 @@
-﻿---
+---
 name: 7hats-marketer
 description: Apply Marketer lens to convert shipped capability into adoption through positioning, internal enablement, launch discipline, and adoption telemetry.
 ---

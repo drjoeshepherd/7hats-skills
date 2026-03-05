@@ -1,4 +1,4 @@
-﻿---
+---
 name: 7hats-entrepreneur
 description: Apply Entrepreneur lens to frame work as explicit bets with minimum proof, kill criteria, review points, and resource-allocation implications.
 ---

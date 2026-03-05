@@ -1,4 +1,4 @@
-﻿---
+---
 name: 7hats-craft
 description: Legacy alias for 7hats-product. Use when users request 7hats-craft; execute the same Product Owner template-driven artifact generation workflow as 7hats-product.
 ---

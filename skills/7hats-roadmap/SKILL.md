@@ -1,4 +1,4 @@
-﻿---
+---
 name: 7hats-roadmap
 description: Build roadmap plans from sliced work and interrelated user requests across multiple services and sprints, including milestones, dependencies, and confidence/risk markers.
 ---

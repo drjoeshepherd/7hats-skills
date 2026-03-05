@@ -1,4 +1,4 @@
-﻿---
+---
 name: 7hats-estimate
 description: Estimate agile story points for stories, features, or slice sets using standard estimation strategies. Default to Fibonacci (1,2,3,5,8,13,21) unless the user specifies another strategy or scale.
 ---

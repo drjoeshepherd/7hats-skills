@@ -1,4 +1,4 @@
-﻿---
+---
 name: 7hats-slice-work
 description: Break large Epic, Mission, or Signal scope spanning multiple services and sprints into thin vertical slices and sequenced user stories with explicit dependencies and readiness checks.
 ---

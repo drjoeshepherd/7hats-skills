@@ -1,4 +1,4 @@
-﻿---
+---
 name: 7hats-engineer
 description: Apply Engineer lens to map system constraints, dependencies, non-functional requirements, and technical risk retirement for Mission, Signal, and Story planning.
 ---

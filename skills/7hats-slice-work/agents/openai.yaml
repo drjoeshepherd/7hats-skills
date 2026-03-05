@@ -1,4 +1,4 @@
-﻿version: 1
+version: 1
 display_name: 7hats Slice Work
 short_description: Decompose large epics/missions/signals into thin vertical slices and sequenced stories.
 default_prompt: Use 7hats-slice-work to split cross-service, multi-sprint work into thin vertical slices with dependency-aware sequencing.

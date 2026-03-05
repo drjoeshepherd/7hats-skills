@@ -1,4 +1,4 @@
-﻿version: 1
+version: 1
 display_name: 7hats Estimate
 short_description: Estimate story points with standard agile strategies, defaulting to Fibonacci if unspecified.
 default_prompt: Use 7hats-estimate to size stories or slices with agile story points; use Fibonacci 1,2,3,5,8,13,21 by default unless another method is requested.

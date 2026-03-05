@@ -1,4 +1,4 @@
-﻿---
+---
 name: 7hats-product
 description: Generate request-scoped backlog and spec artifacts from intent using canonical JSON/markdown templates. Use when work must be materialized into Story, Bug, Customer Request, Epic, Feature, Mission, Signal, Design Spec, or Research Spec with readiness and grounding checks.
 ---

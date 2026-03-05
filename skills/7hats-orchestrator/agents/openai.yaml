@@ -1,4 +1,4 @@
-﻿version: 1
+version: 1
 display_name: 7hats Orchestrator
 short_description: Legacy alias of 7hats; intent-first router selecting internal capability skills.
 default_prompt: Route intent-based requests through the same capability chain as 7hats and return one request-scoped artifact.

@@ -1,4 +1,4 @@
-﻿version: 1
+version: 1
 display_name: 7hats Analyze Backlog
 short_description: Analyze backlog CSV/item sets for themes, risk, ambiguity, dependencies, and readiness.
 default_prompt: Use 7hats-analyze-backlog to review backlog items and identify themes, readiness gaps, risks, and corrective actions.

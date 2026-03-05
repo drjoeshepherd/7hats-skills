@@ -1,6 +1,6 @@
-﻿---
+---
 name: 7hats
-description: Route TPM/Product Owner work through intent-first capability selection, chaining skills like backlog analysis, slicing, roadmapping, and artifact crafting while keeping outputs request-scoped and grounded.
+description: Intent-first entry skill for TPM/Product work. Use when users ask to clarify, plan, de-risk, decide, validate, or recover outcomes; routes to capability skills (7hats-product, analyze-backlog, slice-work, estimate, roadmap) and returns one request-scoped artifact with readiness and source grounding.
 ---
 
 # 7hats

@@ -1,4 +1,4 @@
-﻿version: 1
+version: 1
 display_name: 7hats
 short_description: Intent-first router that selects internal capability skills and returns one request-scoped artifact.
 default_prompt: For intent-based requests (clarify, plan, de-risk, decide, validate, recover), route through the right capability chain and return only the requested artifact type with grounded sources.

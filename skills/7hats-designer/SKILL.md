@@ -1,4 +1,4 @@
-﻿---
+---
 name: 7hats-designer
 description: Apply Designer lens to define user-flow quality, edge states, accessibility expectations, and measurable behavior outcomes across Mission, Signal, and Story work.
 ---

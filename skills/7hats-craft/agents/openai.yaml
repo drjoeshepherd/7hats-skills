@@ -1,4 +1,4 @@
-﻿version: 1
+version: 1
 display_name: 7hats Craft
 short_description: Legacy alias of 7hats-product for Product Owner template-based artifact generation.
 default_prompt: Treat 7hats-craft as 7hats-product and generate one request-scoped artifact from canonical templates with readiness checks.

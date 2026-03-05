@@ -1,10 +1,9 @@
-﻿---
-name: 7hats
-description: Route TPM/Product Owner work through intent-first capability selection, chaining skills like backlog analysis, slicing, roadmapping, and artifact crafting while keeping outputs request-scoped and grounded.
+---
+name: 7hats-orchestrator
+description: Legacy alias of 7hats. Intent-first entry for TPM/Product work that routes clarify/plan/de-risk/decide/validate/recover requests to capability skills (7hats-product, analyze-backlog, slice-work, estimate, roadmap) and returns one request-scoped artifact with readiness and source grounding.
 ---
 
-# 7hats
-
+# 7hats Orchestrator
 Use this skill as the user-facing entry point: parse intent, choose internal capabilities, and return only the requested artifact type.
 
 ## Load Order
@@ -82,3 +81,4 @@ Use this skill as the user-facing entry point: parse intent, choose internal cap
   - `Failed Gates`
   - `Missing Sources`
   - `Corrective Actions`
+

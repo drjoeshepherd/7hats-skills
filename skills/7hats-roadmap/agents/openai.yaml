@@ -1,4 +1,4 @@
-﻿version: 1
+version: 1
 display_name: 7hats Roadmap
 short_description: Create dependency-aware roadmaps from slices and interrelated requests.
 default_prompt: Use 7hats-roadmap to convert sliced work into a milestone roadmap with sequencing, risks, and confidence markers.

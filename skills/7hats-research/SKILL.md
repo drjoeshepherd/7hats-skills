@@ -1,4 +1,4 @@
-﻿---
+---
 name: 7hats-research
 description: Apply Researcher lens for data-driven signal work and uncertainty reduction: convert assumptions, analytics trends, and drop-off patterns into testable hypotheses, evidence plans, and decision thresholds.
 ---

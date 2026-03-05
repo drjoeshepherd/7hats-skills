@@ -1,4 +1,4 @@
-﻿version: 1
+version: 1
 display_name: 7hats Research
 short_description: Research lens for analytics/signal interpretation, hypotheses, evidence thresholds, and decision triggers.
 default_prompt: Use Researcher lens for data-driven signals (for example trends or drop-offs) and convert uncertainty into hypotheses, evidence plans, and decision thresholds.

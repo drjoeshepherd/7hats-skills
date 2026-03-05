@@ -1,4 +1,4 @@
-﻿---
+---
 name: 7hats-meta
 description: Apply Meta (Being Human) lens to improve decision ownership, trust, collaboration health, and execution sustainability across TPM/Product work.
 ---
