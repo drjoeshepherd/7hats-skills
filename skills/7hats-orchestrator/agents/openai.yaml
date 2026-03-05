@@ -1,5 +1,4 @@
 ﻿version: 1
 display_name: 7hats Orchestrator
-short_description: Default router for generic Mission/Signal/Story requests when hat routing is unclear or cross-hat.
-default_prompt: For generic Mission, Signal, Story, or breakdown requests without an explicit hat, route through the best 7 Hats sequence and return only the requested artifact type with grounded sources.
-
+short_description: Legacy alias of 7hats; intent-first router selecting internal capability skills.
+default_prompt: Route intent-based requests through the same capability chain as 7hats and return one request-scoped artifact.

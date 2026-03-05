@@ -1,4 +1,4 @@
-# Plan: MCP Contract Specification For 7hats
+﻿# Plan: MCP Contract Specification For 7hats
 
 ## Objective
 Define a stable, implementation-ready MCP contract so 7hats can be consumed by MCP-capable agents without coupling MCP runtime details into skill content files.
@@ -19,7 +19,7 @@ Out of scope:
 ## Tool Catalog (v1)
 
 1. `route_hat`
-- Purpose: classify request type, intent, and dominant constraint; return deterministic hat plan.
+- Purpose: classify request type, intent, and dominant constraint; return deterministic routing with hat and capability metadata.
 
 2. `create_artifact`
 - Purpose: generate one request-scoped artifact using canonical template rules.
@@ -51,6 +51,7 @@ Out of scope:
 - `request_text` (string, required)
 - `artifact_type` (enum, optional)
 - `intent` (enum, optional: `clarify|plan|de-risk|decide|validate|recover`)
+- `problem_type` (enum, optional: `single_artifact|backlog_analysis|slice_planning|roadmap_planning|mixed`)
 - `context` (object, optional)
 - `repo_context` (object, optional):
   - `attached` (boolean)
@@ -61,6 +62,9 @@ Out of scope:
 ### `route_hat` response
 - `primary_hat` (enum)
 - `secondary_hats` (array enum)
+- `primary_capability` (enum, optional)
+- `supporting_capabilities` (array enum, optional)
+- `selected_capabilities` (array enum, optional)
 - `constraint_classification` (enum)
 - `intent` (enum)
 - `repo_mode` (enum: `repo_aware` | `generic`)
@@ -201,7 +205,8 @@ Repo-aware citation rule:
 2. Template version is explicit on template/artifact responses.
 3. Breaking changes require MAJOR bump and migration notes.
 4. Legacy aliases map at routing layer, not template layer.
-5. Deterministic route/validate fields are required in v1 for stable CI assertions.
+5. Capability fields in `route_hat` are additive and optional for backward compatibility.
+6. Deterministic route/validate fields are required in v1 for stable CI assertions.
 
 ## Non-Interference Guardrails
 
@@ -240,3 +245,4 @@ Repo-aware citation rule:
 3. Build MCP server adapter against schema.
 4. Add MCP contract smoke tests in CI.
 5. Publish integration quickstart for client setup.
+

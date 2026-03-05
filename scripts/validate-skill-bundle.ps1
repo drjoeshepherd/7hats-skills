@@ -24,6 +24,10 @@ if (-not (Test-Path $operatingSystemRoot)) {
 $requiredSkills = @(
   "7hats",
   "7hats-craft",
+  "7hats-analyze-backlog",
+  "7hats-slice-work",
+  "7hats-roadmap",
+  "7hats-estimate",
   "7hats-research",
   "7hats-design",
   "7hats-engineer",
@@ -60,7 +64,8 @@ $requiredOperatingSystemFiles = @(
   "routing-table.md",
   "handoff-contract.md",
   "trigger-schema.md",
-  "repo-context-gate.md"
+  "repo-context-gate.md",
+  "capability-catalog.md"
 )
 
 $requiredSmokeScripts = @(
@@ -151,6 +156,7 @@ foreach ($skill in $intentAwareSkills) {
       "docs/operating-system/intent-taxonomy.md",
       "docs/operating-system/routing-table.md",
       "docs/operating-system/repo-context-gate.md",
+      "docs/operating-system/capability-catalog.md",
       "Repo-Aware Mode",
       "Generic Mode"
     )) {
@@ -180,6 +186,7 @@ if (Test-Path $canonicalContracts) {
 }
 
 $canonicalPlaybooks = @(
+  "7hats-product\references\playbooks.md",
   "7hats-craft\references\playbooks.md",
   "7hats-research\references\playbooks.md",
   "7hats-design\references\playbooks.md",
@@ -208,5 +215,6 @@ if ($errors.Count -gt 0) {
 
 Write-Host "Validation passed." -ForegroundColor Green
 exit 0
+
 
 

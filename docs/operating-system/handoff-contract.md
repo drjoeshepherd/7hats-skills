@@ -1,25 +1,27 @@
-﻿# Cross-Hat Handoff Contract (v1)
+﻿# Cross-Hat Handoff Contract (v2)
 
 ## Purpose
-Define a standard internal packet for skill-to-skill handoffs across hats.
+Define a standard internal packet for capability-skill execution handoffs across hats.
 
 ## Handoff Packet
 
 ```json
 {
+  "capability": "7hats-slice-work",
   "from_hat": "product_owner",
   "to_hat": "engineer",
-  "intent": "de-risk",
-  "reason": "pre-launch integration risk detected",
-  "requested_artifact_type": "story",
+  "intent": "plan",
+  "reason": "cross-service dependency sequencing required",
+  "requested_artifact_type": "user_story",
   "context_summary": "one paragraph max",
   "constraints": ["deadline: 2026-04-15", "no schema break"],
-  "required_outputs": ["nfr_impact", "top_failure_modes", "rollback_notes"],
+  "required_outputs": ["dependency_map", "failure_modes", "rollback_notes"],
   "source_refs": ["services/payments/README.md", "mappings/repo-map.md"]
 }
 ```
 
 ## Required Fields
+- `capability`
 - `from_hat`
 - `to_hat`
 - `intent`

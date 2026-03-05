@@ -1,4 +1,4 @@
-# Compatibility Guide
+﻿# Compatibility Guide
 
 This document defines command compatibility, versioning expectations, and deprecation policy for the 7hats skill bundle.
 
@@ -6,8 +6,12 @@ This document defines command compatibility, versioning expectations, and deprec
 
 Use these commands for all new usage:
 
-- `7hats` (default router)
-- `7hats-craft`
+- `7hats` (default intent-first router)
+- `7hats-product`
+- `7hats-analyze-backlog`
+- `7hats-slice-work`
+- `7hats-roadmap`
+- `7hats-estimate`
 - `7hats-research`
 - `7hats-design`
 - `7hats-engineer`
@@ -20,7 +24,7 @@ Use these commands for all new usage:
 Legacy names remain available for compatibility:
 
 - `7hats-orchestrator` -> `7hats`
-- `7hats-product` -> `7hats-craft`
+- `7hats-craft` -> `7hats-product`
 - `7hats-researcher` -> `7hats-research`
 - `7hats-designer` -> `7hats-design`
 - `7hats-marketer` -> `7hats-market`
@@ -72,3 +76,5 @@ Before release, all of the following must pass:
 - `scripts/validate-skill-bundle.ps1`
 - `scripts/smoke-test-templates.ps1`
 - `scripts/smoke-test-routing.ps1`
+
+

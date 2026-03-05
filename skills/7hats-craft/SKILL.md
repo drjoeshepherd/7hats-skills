@@ -1,54 +1,35 @@
 ﻿---
 name: 7hats-craft
-description: Apply Product Owner lens for direct story, mission, or signal authoring: convert intent into measurable backlog value, prioritize work, and produce clear, testable, request-scoped artifacts.
+description: Legacy alias for 7hats-product. Use when users request 7hats-craft; execute the same Product Owner template-driven artifact generation workflow as 7hats-product.
 ---
 
 # 7hats Craft
 
-Use for backlog clarity, value framing, prioritization, and incremental slicing.
+Use this as a compatibility alias of `7hats-product`.
 
 ## Load Order
-- `references/lens.md`
-- `references/diagnostics.md`
-- `references/playbooks.md`
-- `references/templates.md`
+- `../7hats-product/references/lens.md`
+- `../7hats-product/references/diagnostics.md`
+- `../7hats-product/references/playbooks.md`
+- `../7hats-product/references/templates.md`
+- `docs/templates/README.md`
 - `docs/requirements-style.md`
 - `docs/definition-of-ready.md`
 
-## When To Use
-- Mission needs sharper value and boundaries.
-- Signal needs urgency and outcome clarity.
-- Story needs scope cuts and testable AC.
-- Backlog priority is disputed or unstable.
-
-## Required Inputs
-- Request text and requested artifact type.
-- Current constraints/dependencies (if known).
-- Available sources for grounding.
-
 ## Workflow
-1. Clarify business outcome and target behavior change.
-2. Choose prioritization model from `references/lens.md` based on context.
-3. Define scope boundaries and smallest viable slice.
-4. Write artifact using request-scoped template from `references/templates.md`.
-5. Run diagnostics from `references/diagnostics.md`.
-6. Validate DoR and grounding; return `Needs Refinement` if required fields are missing.
+1. Treat the request as `7hats-product` behavior.
+2. Generate request-scoped artifact using canonical template contracts.
+3. Apply readiness and grounding checks.
+4. Return output under the same contract as `7hats-product`.
 
 ## Output Contract
-- Return only requested artifact type.
-- Include explicit scope boundaries.
-- Include measurable outcomes and testable acceptance criteria.
-- Include `Source References` with concrete repo citations.
-- Include `Readiness Verdict` when readiness is in question.
+- Match `7hats-product` output contract exactly.
+- Return only the requested artifact type.
+- Include `Source References` and `Readiness Verdict`.
 
 ## Failure/Refinement Behavior
-- Return `Needs Refinement` when:
-  - value or outcome is not measurable
-  - scope boundaries are missing
-  - artifact type requested is not respected
-  - source grounding is insufficient
+- Return `Needs Refinement` under the same gate conditions as `7hats-product`.
 - Include:
   - `Failed Gates`
   - `Missing Sources`
-
-
+  - `Corrective Actions`

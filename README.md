@@ -2,7 +2,7 @@
 
 Intent-first TPM skill system for Codex.
 
-Use `7hats` to describe what you want to do. The system selects hats and internal steps automatically.
+Use `7hats` to describe the problem to solve. The system maps intent to internal capability skills and uses hats as internal execution roles.
 
 ## Install
 
@@ -33,22 +33,27 @@ Copy-Item -Recurse -Force "$src\7hats-*" $dst
 
 Example prompts:
 - `$7hats clarify this request into a sprint-ready Story`
-- `$7hats plan this Mission into 5 stories`
+- `$7hats plan this Feature into sequenced slices and a roadmap`
 - `$7hats de-risk this launch plan`
 - `$7hats decide between option A and B for onboarding`
 - `$7hats validate this Story before sprint commitment`
 - `$7hats recover this initiative; decisions are stalled`
 
-### Hat-specific commands (advanced)
-- `7hats-craft`
+### Capability skills (advanced/direct)
+- `7hats-product`
+- `7hats-analyze-backlog`
+- `7hats-slice-work`
+- `7hats-roadmap`
+- `7hats-estimate`
+
+### Hat skills (internal role lenses; advanced/direct)
+- `7hats-product` (Product Owner lens)
 - `7hats-research`
 - `7hats-design`
 - `7hats-engineer`
 - `7hats-market`
 - `7hats-entrepreneur`
 - `7hats-human`
-
-Use these when you want to force one lens instead of automatic routing.
 
 ## Output Contract
 
@@ -104,4 +109,8 @@ powershell -ExecutionPolicy Bypass -File .\mcp\tests\smoke-adapter-dry-run.ps1
 - `docs/the-7-hats-foundation.md`
 - `docs/compatibility.md`
 - `docs/intent-first-migration.md`
+- `docs/operating-system/capability-catalog.md`
 - `VERSION` and `CHANGELOG.md` for releases
+
+
+Note: 7hats-craft remains supported as a legacy alias of 7hats-product.

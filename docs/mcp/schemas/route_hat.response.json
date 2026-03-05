@@ -1,4 +1,4 @@
-{
+﻿{
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "route_hat.response",
   "type": "object",
@@ -41,6 +41,42 @@
           "marketer",
           "entrepreneur",
           "meta"
+        ]
+      }
+    },
+    "primary_capability": {
+      "type": "string",
+      "enum": [
+        "7hats-craft",
+        "7hats-product",
+        "7hats-analyze-backlog",
+        "7hats-slice-work",
+        "7hats-roadmap"
+      ]
+    },
+    "supporting_capabilities": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "7hats-craft",
+          "7hats-product",
+          "7hats-analyze-backlog",
+          "7hats-slice-work",
+          "7hats-roadmap"
+        ]
+      }
+    },
+    "selected_capabilities": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "7hats-craft",
+          "7hats-product",
+          "7hats-analyze-backlog",
+          "7hats-slice-work",
+          "7hats-roadmap"
         ]
       }
     },
@@ -223,3 +259,4 @@
     }
   }
 }
+

@@ -22,6 +22,16 @@
         "recover"
       ]
     },
+    "problem_type": {
+      "type": "string",
+      "enum": [
+        "single_artifact",
+        "backlog_analysis",
+        "slice_planning",
+        "roadmap_planning",
+        "mixed"
+      ]
+    },
     "artifact_type": {
       "type": "string",
       "enum": [

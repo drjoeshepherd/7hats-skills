@@ -1,38 +1,44 @@
-﻿# Intent Taxonomy (v1)
+﻿# Intent Taxonomy (v2)
 
 ## Purpose
-Define a small, user-facing intent vocabulary so TPMs can ask for outcomes while the system internally selects hats and micro-steps.
+Define a small, user-facing intent vocabulary so TPMs can ask for outcomes while the system internally selects capability skills.
 
 ## Public Intents
 
 1. `clarify`
 - Goal: convert vague asks into bounded, testable backlog artifacts.
 - Typical use: early refinement, unclear scope, missing measurable outcome.
+- Primary capabilities: `7hats-product`, `7hats-analyze-backlog`.
 - Default artifacts: Story, Mission, Signal.
 
 2. `plan`
 - Goal: create executable sequencing and decomposition.
 - Typical use: mission breakdown, sprint slicing, dependency ordering.
+- Primary capabilities: `7hats-slice-work`, `7hats-roadmap`.
 - Default artifacts: Story series, Story, Mission.
 
 3. `de-risk`
 - Goal: identify and retire major technical, delivery, and adoption risks.
 - Typical use: pre-launch, migration, multi-service integration.
+- Primary capabilities: `7hats-analyze-backlog`, `7hats-product`.
 - Default artifacts: Story, Mission, Signal.
 
 4. `decide`
 - Goal: force explicit tradeoff and decision criteria.
 - Typical use: competing options, repeated arguments, unresolved ownership.
+- Primary capabilities: `7hats-product`.
 - Default artifacts: Story or Mission (decision-ready framing).
 
 5. `validate`
 - Goal: run readiness and grounding checks before commitment.
 - Typical use: pre-sprint or pre-approval quality gate.
+- Primary capabilities: `7hats-analyze-backlog`, `7hats-product`.
 - Default artifacts: same type as input request; may return `Needs Refinement`.
 
 6. `recover`
 - Goal: restore clarity and momentum when execution drifts.
 - Typical use: rising meetings, low decision velocity, repeated blockers.
+- Primary capabilities: `7hats-roadmap`, `7hats-analyze-backlog`.
 - Default artifacts: Story, Signal, or Mission update.
 
 ## Intent Parsing Rules
@@ -60,4 +66,6 @@ When required context is missing:
 ## Source Of Truth
 - `docs/requirements-style.md`
 - `docs/definition-of-ready.md`
+- `docs/operating-system/capability-catalog.md`
 - `skills/7hats/references/output-contracts.md`
+

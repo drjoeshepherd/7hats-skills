@@ -1,7 +1,7 @@
-﻿# Trigger Schema (v1)
+﻿# Trigger Schema (v2)
 
 ## Purpose
-Make automated trigger logic deterministic and machine-evaluable.
+Make automated trigger logic deterministic and machine-evaluable for intent-to-capability routing.
 
 ## Required Trigger Fields
 
@@ -15,8 +15,9 @@ Make automated trigger logic deterministic and machine-evaluable.
   "confidence": "high",
   "fallback": "manual_review",
   "on_match": {
-    "primary_hat": "engineer",
-    "secondary_hats": ["product_owner"],
+    "primary_capability": "7hats-analyze-backlog",
+    "supporting_capabilities": ["7hats-product"],
+    "executor_hats": ["engineer", "product_owner"],
     "required_outputs": ["technical_notes", "acceptance_criteria_updates"]
   }
 }
@@ -30,7 +31,7 @@ Make automated trigger logic deterministic and machine-evaluable.
 - `threshold`: expected value/range.
 - `confidence`: low|medium|high.
 - `fallback`: behavior when source missing/uncertain.
-- `on_match`: routing and expected output contributions.
+- `on_match`: capability routing and expected output contributions.
 
 ## Allowed Predicates (v1)
 - `equals`
@@ -59,4 +60,5 @@ Make automated trigger logic deterministic and machine-evaluable.
 - `needs_refinement`
 
 ## Contract Rule
-Trigger matches may influence internal orchestration only; they must not violate request-scoped output contracts.
+Trigger matches may influence internal capability orchestration only; they must not violate request-scoped output contracts.
+

@@ -1,11 +1,11 @@
 ﻿---
 name: 7hats
-description: Route TPM/Product Owner work when hat selection is unclear or multi-domain, select single or multi-hat sequence, and produce request-scoped Mission, Signal, Story, or Mission/Signal story-breakdown outputs with grounded sources and readiness gates.
+description: Route TPM/Product Owner work through intent-first capability selection, chaining skills like backlog analysis, slicing, roadmapping, and artifact crafting while keeping outputs request-scoped and grounded.
 ---
 
 # 7hats
 
-Use this skill to classify request type and dominant constraint, select the right hat sequence, and return only the requested artifact type.
+Use this skill as the user-facing entry point: parse intent, choose internal capabilities, and return only the requested artifact type.
 
 ## Load Order
 - `references/foundations.md`
@@ -15,6 +15,7 @@ Use this skill to classify request type and dominant constraint, select the righ
 - `references/execution-health-dashboard.md`
 - `references/output-contracts.md`
 - `docs/operating-system/intent-taxonomy.md`
+- `docs/operating-system/capability-catalog.md`
 - `docs/operating-system/routing-table.md`
 - `docs/operating-system/handoff-contract.md`
 - `docs/operating-system/trigger-schema.md`
@@ -25,12 +26,12 @@ Use this skill to classify request type and dominant constraint, select the righ
 - Relevant architecture/service docs in the target implementation repository
 
 ## When To Use
-- Request needs automatic hat selection.
-- Request spans more than one constraint (for example ambiguity plus architecture risk).
-- Request asks for Mission/Signal decomposition into a story series.
+- User requests outcomes by problem intent (clarify, plan, de-risk, decide, validate, recover).
+- Request spans more than one capability (for example backlog analysis plus artifact drafting).
+- Request asks for Mission/Signal decomposition or multi-sprint planning.
 
 ## When Not To Use
-- User explicitly asked for one hat and one narrow output (use that specific `7hats-*` skill).
+- User explicitly asked for one narrow capability skill and no orchestration.
 
 ## Required Inputs
 - User request text.
@@ -53,21 +54,13 @@ Use this skill to classify request type and dominant constraint, select the righ
 - decide
 - validate
 - recover
-4. Classify dominant constraint:
-- Ambiguity/high unknowns
-- Backlog clarity/prioritization
-- UX friction/state design
-- System/NFR risk
-- Adoption/enablement risk
-- Portfolio allocation/bet risk
-- Team-system/decision-health risk
-5. Select hat strategy using `references/switching-matrix.md` and `docs/operating-system/routing-table.md`.
-6. Run internal micro-steps through hat playbooks and handoff packet rules in `docs/operating-system/handoff-contract.md`.
-7. Apply shared question and decision logic:
+4. Select capability chain from `docs/operating-system/routing-table.md` and `docs/operating-system/capability-catalog.md`.
+5. Execute capability steps with internal hat handoffs using `docs/operating-system/handoff-contract.md`.
+6. Apply shared question and decision logic:
 - Ask the 10 core questions from `references/core-question-set.md`.
 - If conflict/uncertainty blocks progress, run `references/decision-framework.md`.
-8. Enforce output contract from `references/output-contracts.md`.
-9. Validate readiness and grounding:
+7. Enforce output contract from `references/output-contracts.md`.
+8. Validate readiness and grounding:
 - If source coverage is insufficient, return `Needs Refinement` with `Missing Sources`.
 - Keep output request-scoped (no extra artifact types).
 
@@ -89,6 +82,3 @@ Use this skill to classify request type and dominant constraint, select the righ
   - `Failed Gates`
   - `Missing Sources`
   - `Corrective Actions`
-
-
-

@@ -1,5 +1,4 @@
 ﻿version: 1
 display_name: 7hats Product
-short_description: Product Owner lens for direct story/mission/signal writing, scope, and prioritization clarity.
-default_prompt: Use Product Owner lens when asked to directly create a Story, Mission, or Signal with measurable outcomes and clear scope.
-
+short_description: Template-driven Product Owner skill for stories, missions, signals, and related backlog/spec outputs.
+default_prompt: Use 7hats-product to generate one requested artifact type from canonical templates with measurable outcomes, clear scope, and readiness checks.
