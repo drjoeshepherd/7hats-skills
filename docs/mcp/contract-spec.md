@@ -135,10 +135,16 @@ Repo-aware citation rule:
 - `repo_mode` (enum: `repo_aware` | `generic`, optional)
 - `intent` (enum, optional)
 - `template_version` (string, optional)
+- `expected_artifacts` (array string, optional): named outputs that must be present in content.
 
 ### `validate_artifact` response
 - `valid` (boolean)
 - `score` (number 0-10)
+- `artifact_completeness` (object, required):
+  - `complete` (boolean)
+  - `expected_artifacts` (array string)
+  - `returned_artifacts` (array string)
+  - `missing_artifacts` (array string)
 - `score_breakdown` (object, optional)
 - `missing_required_fields` (array string)
 - `findings` (array object, optional):
@@ -147,6 +153,7 @@ Repo-aware citation rule:
   - `field_path`
   - `message`
   - `remediation`
+  - includes deterministic code `MISSING_ARTIFACT_OUTPUT` when expected artifacts are absent
 - `violations` (array string)
 - `warnings` (array string)
 - `deterministic_violations` (boolean)

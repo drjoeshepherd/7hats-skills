@@ -111,8 +111,10 @@ Assert-SchemaField -SchemaName "validate_artifact.response.json" -RequiredFields
   "deterministic_violations",
   "validation_profile",
   "findings",
-  "score_breakdown"
+  "score_breakdown",
+  "artifact_completeness"
 )
+Assert-SchemaField -SchemaName "validate_artifact.request.json" -RequiredFields @("expected_artifacts")
 
 if ($errors.Count -gt 0) {
   Write-Host "MCP schema smoke test failed:" -ForegroundColor Red

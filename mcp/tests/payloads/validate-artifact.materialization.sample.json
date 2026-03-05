@@ -1,0 +1,13 @@
+{
+  "artifact_type": "user_story",
+  "content_format": "markdown",
+  "repo_mode": "repo_aware",
+  "intent": "validate",
+  "expected_artifacts": [
+    "User-Trust Feedback States",
+    "Timeout/Heartbeat Thresholds",
+    "Smallest Testable Slice"
+  ],
+  "content": "# User Story\n\n## Title\nAs a user, I want clear background progress.\n\n## Scope\nShow progress while background LLM tasks run.\n\n## Acceptance Criteria\nGiven processing starts, when no tokens stream yet, then show a working status.\n\n## User-Trust Feedback States\n- Running state is visible.\n\n## Source References\n- services/web/README.md\n- mappings/repo-map.md\n"
+}
+

@@ -61,6 +61,13 @@
     },
     "template_version": {
       "type": "string"
+    },
+    "expected_artifacts": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
     }
   }
 }

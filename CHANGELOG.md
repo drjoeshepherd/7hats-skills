@@ -45,6 +45,11 @@
   - added metrics instrumentation docs and script:
     - `docs/operating-system/output-quality-metrics.md`
     - `scripts/measure-mcp-output-quality.ps1`
+- Added artifact materialization validation for completeness enforcement:
+  - `validate_artifact.request` now supports `expected_artifacts`
+  - `validate_artifact.response` now requires `artifact_completeness`
+  - validator emits deterministic `MISSING_ARTIFACT_OUTPUT` findings when expected outputs are missing
+  - added payload and smoke coverage for missing handoff artifact detection
 
 ## 1.0.0 - 2026-03-02
 

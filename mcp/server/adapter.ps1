@@ -227,6 +227,52 @@ function Assert-Contains {
   return $missing
 }
 
+function Get-MaterializedArtifacts {
+  param(
+    [object]$Request,
+    [string]$Format
+  )
+  $expected = @()
+  if (Has-Key $Request "expected_artifacts" -and $Request.expected_artifacts -ne $null) {
+    $expected = @($Request.expected_artifacts | ForEach-Object { [string]$_ } | Where-Object { -not [string]::IsNullOrWhiteSpace($_) })
+  }
+
+  if ($expected.Count -eq 0) {
+    return @{
+      expected_artifacts = @()
+      returned_artifacts = @()
+      missing_artifacts = @()
+      complete = $true
+    }
+  }
+
+  $returned = @()
+  if ($Format -eq "markdown") {
+    $content = [string]$Request.content
+    foreach ($artifact in $expected) {
+      if ($content -match [regex]::Escape($artifact)) {
+        $returned += $artifact
+      }
+    }
+  } else {
+    $obj = if ($Request.content -is [string]) { $Request.content | ConvertFrom-Json } else { $Request.content }
+    $keys = @($obj.PSObject.Properties.Name)
+    foreach ($artifact in $expected) {
+      if ($keys -contains $artifact) {
+        $returned += $artifact
+      }
+    }
+  }
+
+  $missing = @($expected | Where-Object { $returned -notcontains $_ })
+  return @{
+    expected_artifacts = $expected
+    returned_artifacts = $returned
+    missing_artifacts = $missing
+    complete = ($missing.Count -eq 0)
+  }
+}
+
 function Invoke-RouteHat {
   param([object]$Request)
   $intent = Get-Intent -Request $Request
@@ -448,9 +494,16 @@ function Invoke-ValidateArtifact {
   }
 
   $missing = @()
+  $materialization = @{
+    expected_artifacts = @()
+    returned_artifacts = @()
+    missing_artifacts = @()
+    complete = $true
+  }
   if ($format -eq "markdown") {
     $content = [string]$Request.content
     $missing = Assert-Contains -Content $content -Needles $requiredByType[$artifactType]
+    $materialization = Get-MaterializedArtifacts -Request $Request -Format $format
   } else {
     try {
       $obj = if ($Request.content -is [string]) { $Request.content | ConvertFrom-Json } else { $Request.content }
@@ -460,6 +513,7 @@ function Invoke-ValidateArtifact {
           $missing += $field
         }
       }
+      $materialization = Get-MaterializedArtifacts -Request $Request -Format $format
     } catch {
       $missing += "Invalid JSON content"
     }
@@ -471,12 +525,15 @@ function Invoke-ValidateArtifact {
     }
   }
 
-  $valid = ($missing.Count -eq 0)
-  $score = if ($valid) { 9.5 } else { [Math]::Max(0, 9.5 - ($missing.Count * 1.5)) }
+  $allMissing = @($missing + @($materialization.missing_artifacts))
+  $allMissingCount = @($allMissing | Select-Object -Unique).Count
+  $valid = ($missing.Count -eq 0 -and $materialization.complete)
+  $score = if ($valid) { 9.5 } else { [Math]::Max(0, 9.5 - ($allMissingCount * 1.5)) }
 
   return @{
     valid = $valid
     score = $score
+    artifact_completeness = $materialization
     score_breakdown = @{
       structure_compliance = if ($valid) { 9.5 } else { 7.0 }
       repo_grounding_and_citations = if ($repoMode -eq "repo_aware" -and $missing.Count -gt 0) { 6.0 } else { 9.0 }
@@ -494,9 +551,19 @@ function Invoke-ValidateArtifact {
           remediation = "Add '$field' to artifact content and rerun validation."
         }
       }
+      foreach ($artifact in @($materialization.missing_artifacts)) {
+        @{
+          code = "MISSING_ARTIFACT_OUTPUT"
+          severity = "error"
+          field_path = "/content"
+          message = "Expected artifact output not found: $artifact"
+          remediation = "Materialize '$artifact' explicitly in the artifact and rerun validation."
+        }
+      }
     )
     violations = @(
       if ($missing.Count -gt 0) { "Missing required fields for $artifactType validation profile." }
+      if (-not $materialization.complete) { "Expected handoff artifacts were not fully materialized." }
     ) | Where-Object { $_ -ne $null }
     warnings = @(
       if ($repoMode -eq "generic") { "Validation ran in generic mode; repo-specific checks are limited." }

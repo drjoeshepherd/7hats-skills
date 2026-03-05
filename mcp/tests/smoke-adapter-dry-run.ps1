@@ -29,8 +29,9 @@ try {
   $createPath = Join-Path $payloadRoot "create-artifact.repo-aware.structured.json"
   $createLegacyPath = Join-Path $payloadRoot "create-artifact.repo-aware.legacy-refs.json"
   $validatePath = Join-Path $payloadRoot "validate-artifact.sample.json"
+  $validateMaterializationPath = Join-Path $payloadRoot "validate-artifact.materialization.sample.json"
 
-  foreach ($path in @($repoAwarePath, $repoAwareStructuredPath, $genericPath, $createPath, $createLegacyPath, $validatePath)) {
+  foreach ($path in @($repoAwarePath, $repoAwareStructuredPath, $genericPath, $createPath, $createLegacyPath, $validatePath, $validateMaterializationPath)) {
     if (-not (Test-Path $path)) {
       $errors += "Missing payload file: $path"
     }
@@ -124,6 +125,21 @@ try {
     }
     if (-not $validate.PSObject.Properties.Name.Contains("score_breakdown")) {
       $errors += "validate_artifact response missing score_breakdown."
+    }
+    if (-not $validate.PSObject.Properties.Name.Contains("artifact_completeness")) {
+      $errors += "validate_artifact response missing artifact_completeness."
+    }
+
+    $validateMaterialization = Invoke-Adapter -Tool "validate_artifact" -RequestPath $validateMaterializationPath
+    if ($validateMaterialization.artifact_completeness.complete -ne $false) {
+      $errors += "Expected artifact_completeness.complete=false for missing expected artifacts."
+    }
+    if ($validateMaterialization.valid -ne $false) {
+      $errors += "Expected validate_artifact valid=false when expected artifacts are missing."
+    }
+    $missingArtifactFinding = @($validateMaterialization.findings | Where-Object { $_.code -eq "MISSING_ARTIFACT_OUTPUT" })
+    if ($missingArtifactFinding.Count -lt 1) {
+      $errors += "Expected at least one MISSING_ARTIFACT_OUTPUT finding."
     }
 
   }

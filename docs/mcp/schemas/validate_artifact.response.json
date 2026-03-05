@@ -6,6 +6,7 @@
   "required": [
     "valid",
     "score",
+    "artifact_completeness",
     "missing_required_fields",
     "violations",
     "warnings",
@@ -21,6 +22,42 @@
       "type": "number",
       "minimum": 0,
       "maximum": 10
+    },
+    "artifact_completeness": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "complete",
+        "expected_artifacts",
+        "returned_artifacts",
+        "missing_artifacts"
+      ],
+      "properties": {
+        "complete": {
+          "type": "boolean"
+        },
+        "expected_artifacts": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "returned_artifacts": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "missing_artifacts": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
     },
     "score_breakdown": {
       "type": "object",

@@ -21,6 +21,7 @@ This folder contains contract-first MCP smoke coverage and adapter dry-run check
 - Verifies collaboration receipt fields (`required_outputs`, `contribution_summary`, `unresolved_risks`, `receipt`).
 - Verifies strict repo-aware citation gating (legacy string refs return `Needs Refinement`).
 - Verifies structured validate-artifact outputs (`findings`, `score_breakdown`).
+- Verifies artifact materialization validation (`artifact_completeness`, `MISSING_ARTIFACT_OUTPUT`).
 
 3. `payloads/*`
 - Example request payloads for route, create, and validate scenarios, including structured source citations.
