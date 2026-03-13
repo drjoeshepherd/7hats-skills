@@ -38,6 +38,7 @@ Example prompts:
 - `$7hats decide between option A and B for onboarding`
 - `$7hats validate this Story before sprint commitment`
 - `$7hats recover this initiative; decisions are stalled`
+- `$7hats-code-review review this diff and return JSON findings`
 
 ### Capability skills (advanced/direct)
 - `7hats-product`
@@ -45,6 +46,7 @@ Example prompts:
 - `7hats-slice-work`
 - `7hats-roadmap`
 - `7hats-estimate`
+- `7hats-code-review`
 
 ### Hat skills (internal role lenses; advanced/direct)
 - `7hats-product` (Product Owner lens)
@@ -68,6 +70,7 @@ Outputs are always request-scoped:
 The system auto-detects execution context:
 - `Repo-Aware Mode`: when a real code repo is attached; responses must cite real files and align to actual architecture/code.
 - `Generic Mode`: when no repo is attached; speculative implementation details are avoided and readiness may be `Needs Refinement`.
+- `7hats-code-review` first scans the attached repo for standards in Repo-Aware Mode and falls back to this bundle's baseline review standards when none are found.
 
 ## MCP
 

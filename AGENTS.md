@@ -15,4 +15,19 @@ This repository distributes the 7 Hats skill bundle as a standalone package.
 - `docs/definition-of-ready.md`
 - `docs/tpm-agent-operating-guide.md`
 
+## Canonical Skills
+- `7hats`
+- `7hats-product`
+- `7hats-analyze-backlog`
+- `7hats-slice-work`
+- `7hats-roadmap`
+- `7hats-estimate`
+- `7hats-code-review`
+- `7hats-research`
+- `7hats-design`
+- `7hats-engineer`
+- `7hats-market`
+- `7hats-entrepreneur`
+- `7hats-human`
+
 

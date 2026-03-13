@@ -31,12 +31,18 @@ Define internal capability skills used by `7hats` so user-facing interaction rem
 - Default strategy: Fibonacci (`1,2,3,5,8,13,21`) when user does not specify.
 - Internal executor hats: Product Owner + Engineer primary.
 
+6. `7hats-code-review`
+- Purpose: review diffs, pull requests, commits, or repo slices against discovered repository standards and engineering risk signals.
+- Typical outputs: JSON review findings with severity, evidence, applied standards, testing gaps, and residual risks.
+- Internal executor hats: Engineer primary; Product Owner for contract/regression impact when needed.
+
 ## Selection Hints
 1. If input is one artifact request with clear type, start with `7hats-product`.
 2. If input is a backlog batch or CSV, start with `7hats-analyze-backlog`.
 3. If input is too large for one sprint or spans multiple services, include `7hats-slice-work`.
 4. If output needs timeline/phasing across initiatives, include `7hats-roadmap`.
 5. If user asks for sizing/points, include `7hats-estimate`.
+6. If user asks for a PR review, diff review, or standards-based code review, include `7hats-code-review`.
 
 ## Chaining Patterns
 1. Backlog triage -> artifact generation:

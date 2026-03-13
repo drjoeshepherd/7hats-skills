@@ -12,6 +12,7 @@ Use these commands for all new usage:
 - `7hats-slice-work`
 - `7hats-roadmap`
 - `7hats-estimate`
+- `7hats-code-review`
 - `7hats-research`
 - `7hats-design`
 - `7hats-engineer`

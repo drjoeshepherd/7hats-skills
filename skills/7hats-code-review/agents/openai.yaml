@@ -1,0 +1,4 @@
+version: 1
+display_name: 7hats Code Review
+short_description: Repo-aware code review skill that discovers standards and returns findings in a strict JSON contract.
+default_prompt: Use 7hats-code-review to review code changes against repo standards, falling back to the 7hats bundle baseline when no target-repo standards are available, and return JSON only.

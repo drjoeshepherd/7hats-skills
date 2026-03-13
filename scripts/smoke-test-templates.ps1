@@ -3,6 +3,17 @@ $ErrorActionPreference = "Stop"
 $root = Split-Path -Parent $PSScriptRoot
 $templatesRoot = Join-Path $root "docs\templates"
 $designBriefSchemaPath = Join-Path $templatesRoot "schemas\design-brief.schema.json"
+$dorSchemaPaths = @(
+  "schemas\\user-story.schema.json",
+  "schemas\\bug.schema.json",
+  "schemas\\feature.schema.json",
+  "schemas\\customer-request.schema.json",
+  "schemas\\epic.schema.json",
+  "schemas\\mission.schema.json",
+  "schemas\\signal.schema.json",
+  "schemas\\design-spec.schema.json",
+  "schemas\\research-spec.schema.json"
+)
 
 if (-not (Test-Path $templatesRoot)) {
   throw "Missing templates directory: $templatesRoot"
@@ -127,6 +138,29 @@ if (-not (Test-Path $designBriefSchemaPath)) {
     }
   } catch {
     $errors += "[Design Brief Schema] Invalid JSON: docs/templates/schemas/design-brief.schema.json"
+  }
+}
+
+foreach ($relativePath in $dorSchemaPaths) {
+  $schemaPath = Join-Path $templatesRoot $relativePath
+  if (-not (Test-Path $schemaPath)) {
+    $errors += "[DoR Schema] Missing file: docs/templates/$relativePath"
+    continue
+  }
+
+  try {
+    $schema = Get-Content -Raw $schemaPath | ConvertFrom-Json
+    if ($schema.type -ne "object") {
+      $errors += "[DoR Schema] Root type must be object: docs/templates/$relativePath"
+    }
+    $schemaRequired = @($schema.required)
+    foreach ($field in @("artifact_type","title","business_context","technical_context","validation_context","execution_governance","source_references","readiness")) {
+      if ($schemaRequired -notcontains $field) {
+        $errors += "[DoR Schema] Missing required field '$field': docs/templates/$relativePath"
+      }
+    }
+  } catch {
+    $errors += "[DoR Schema] Invalid JSON: docs/templates/$relativePath"
   }
 }
 

@@ -18,6 +18,15 @@ docs/templates/
     design-spec.md
     research-spec.md
   schemas/
+    user-story.schema.json
+    bug.schema.json
+    feature.schema.json
+    customer-request.schema.json
+    epic.schema.json
+    mission.schema.json
+    signal.schema.json
+    design-spec.schema.json
+    research-spec.schema.json
     design-brief.schema.json
 ```
 
@@ -26,4 +35,10 @@ docs/templates/
 - `Mission`, `Signal`, and `User Story` templates are aligned to existing 7 Hats contracts.
 - Other templates are defined using common industry patterns and can be extended safely.
 - Keep output request-scoped to the requested artifact type.
-- Use `schemas/design-brief.schema.json` to validate JSON-shaped design brief payloads.
+- Use `schemas/*.schema.json` to validate JSON-shaped artifact payloads.
+- DoR enforcement schemas define:
+  - `business_context`
+  - `technical_context`
+  - `validation_context`
+  - `execution_governance`
+  - `readiness`

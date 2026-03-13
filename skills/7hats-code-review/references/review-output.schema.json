@@ -1,0 +1,276 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://7hats.local/schemas/code-review-output.schema.json",
+  "title": "7hats Code Review Output",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "skill",
+    "mode",
+    "review_scope",
+    "verdict",
+    "summary",
+    "applied_standards",
+    "verified_facts",
+    "assumptions",
+    "findings",
+    "open_questions",
+    "testing_gaps",
+    "residual_risks",
+    "verification_steps",
+    "missing_sources",
+    "failed_gates"
+  ],
+  "properties": {
+    "skill": {
+      "const": "7hats-code-review"
+    },
+    "mode": {
+      "type": "string",
+      "enum": [
+        "repo_aware",
+        "fallback"
+      ]
+    },
+    "review_scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "targets"
+      ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "pull_request",
+            "diff",
+            "commit_range",
+            "file_set",
+            "repo_slice",
+            "full_repo",
+            "unknown"
+          ]
+        },
+        "targets": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "verdict": {
+      "type": "string",
+      "enum": [
+        "approved",
+        "comment",
+        "changes_requested",
+        "needs_refinement"
+      ]
+    },
+    "summary": {
+      "type": "string",
+      "minLength": 1
+    },
+    "applied_standards": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "source",
+          "source_type",
+          "strength",
+          "categories",
+          "notes"
+        ],
+        "properties": {
+          "source": {
+            "type": "string",
+            "minLength": 1
+          },
+          "source_type": {
+            "type": "string",
+            "enum": [
+              "target_repo",
+              "fallback_bundle"
+            ]
+          },
+          "strength": {
+            "type": "string",
+            "enum": [
+              "explicit",
+              "inferred"
+            ]
+          },
+          "categories": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "correctness",
+                "security",
+                "contracts_data",
+                "performance_reliability",
+                "testing",
+                "architecture",
+                "maintainability",
+                "readability"
+              ]
+            }
+          },
+          "notes": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "verified_facts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "fact",
+          "evidence"
+        ],
+        "properties": {
+          "fact": {
+            "type": "string",
+            "minLength": 1
+          },
+          "evidence": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "assumptions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "findings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "category",
+          "severity",
+          "title",
+          "file",
+          "line",
+          "why_it_matters",
+          "evidence",
+          "standards_sources"
+        ],
+        "properties": {
+          "category": {
+            "type": "string",
+            "enum": [
+              "correctness",
+              "security",
+              "contracts_data",
+              "performance_reliability",
+              "testing",
+              "architecture",
+              "maintainability",
+              "readability"
+            ]
+          },
+          "severity": {
+            "type": "string",
+            "enum": [
+              "critical",
+              "high",
+              "medium",
+              "low"
+            ]
+          },
+          "title": {
+            "type": "string",
+            "minLength": 1
+          },
+          "file": {
+            "type": "string",
+            "minLength": 1
+          },
+          "line": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "minimum": 1
+          },
+          "why_it_matters": {
+            "type": "string",
+            "minLength": 1
+          },
+          "evidence": {
+            "type": "string",
+            "minLength": 1
+          },
+          "standards_sources": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "suggested_fix": {
+            "type": "string"
+          },
+          "confidence": {
+            "type": "string",
+            "enum": [
+              "high",
+              "medium",
+              "low"
+            ]
+          }
+        }
+      }
+    },
+    "open_questions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "testing_gaps": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "residual_risks": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "verification_steps": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "missing_sources": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "failed_gates": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}
