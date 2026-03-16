@@ -66,23 +66,15 @@ Use this hierarchy for all planning artifacts:
 - Tactical implementation unit linked to a parent Signal or Mission when possible.
 - Must include:
   - `Title` (`[System Area] Clear Summary`; story form may use `As a <Role>, I want <Goal>`)
-  - `Context/Origin` (optional; reference Signal or Mission only when provided/required)
-  - `Scope`
-  - `Out of Scope`
-  - `Assumptions`
-  - `Dependencies`
-  - `Description` (concise supporting context)
+  - `Description` (prefer story form such as `As a <Role>, I want <Goal> so that <Outcome>`)
+  - `Context/Origin` (business context and source trigger; reference Signal or Mission only when provided/required)
   - `Acceptance Criteria`
-  - `Estimate` (XS=1, S=2-3, M=5, L=8, XL=13; break down XXL=21+)
-  - `Priority` (required for top-level items)
-  - `QA Evidence` field placeholder (for validation traceability)
-  - `Technical Notes`
-  - `Source References`
+  - `Readiness Verdict`
 
 4. `Customer Request`
 - Tactical unit similar to a Story, but sourced directly from a paying white-label tenant.
 - Must include the same fields as `Story`, plus:
-  - `Tenant Context` (who asked, relevant contract/SLA constraints if known)
+  - `Tenant Context` may be folded into `Context/Origin`
 
 Standalone operational Stories are allowed when no parent Signal or Mission exists. Mark them as `Operational`.
 
@@ -94,10 +86,17 @@ Standalone operational Stories are allowed when no parent Signal or Mission exis
   - user or operator outcomes
   - requirements and acceptance criteria
   - constraints stated at a business or product level
+- Default field order for initial `Story`, `Feature`, `Epic`, and `Customer Request` style artifacts:
+  - `Title`
+  - `Description`
+  - `Context`
+  - `Acceptance Criteria`
+  - `Readiness Verdict`
 - Do not include repo paths, service names, code citations, architecture notes, implementation dependencies, rollout mechanics, or technical design detail in early artifacts unless:
   - the user explicitly asks for implementation detail
   - the current task is `de-risk`, `validate`, engineering planning, or engineering review
   - the absence of implementation context would make the requirement misleading
+- Move `Scope`, `Out of Scope`, `Assumptions`, `Dependencies`, `Estimate`, `Priority`, `QA Evidence`, `Technical Notes`, and similar execution-detail fields to engineering stage-gated details unless the user explicitly asks for them.
 - Repo context may be used internally to avoid contradictions, but should not be surfaced by default in business-first artifacts.
 - Design-stage outputs should focus on behavior, states, accessibility, and measurable interaction quality before implementation shape.
 - Engineering-stage outputs may include architecture, dependency, NFR, rollout, rollback, and repo-specific detail when the task calls for it.
@@ -136,6 +135,7 @@ Standalone operational Stories are allowed when no parent Signal or Mission exis
 - If user asks to break down a Mission/Signal, return only the required series of stories.
 - Include only fields relevant to the requested work item type.
 - Do not auto-append design or engineering sections to early backlog artifacts unless the user asks for them.
+- For initial backlog artifacts, prefer the minimum business-first field set before any execution-detail sections.
 
 ## Mission/Signal Planning Lens (Required)
 - For Mission/Signal outputs, explicitly apply 7 Hats concepts:

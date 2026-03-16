@@ -12,7 +12,7 @@ Run prompts directly from this workspace.
 ### Option 2: Install globally in Codex
 
 ```powershell
-$src = "c:\Projects\7hats-skills\skills"
+$src = "c:\Eczentric\7hats-skills\skills"
 $dst = "$env:USERPROFILE\.codex\skills"
 New-Item -ItemType Directory -Force $dst | Out-Null
 Copy-Item -Recurse -Force "$src\7hats-*" $dst

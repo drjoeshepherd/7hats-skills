@@ -36,6 +36,8 @@ docs/templates/
 - `Mission`, `Signal`, and `User Story` templates are aligned to existing 7 Hats contracts.
 - Other templates are defined using common industry patterns and can be extended safely.
 - Keep output request-scoped to the requested artifact type.
+- Initial backlog templates should lead with the business-first field order: `Title`, `Description`, `Context`, `Acceptance Criteria`, `Readiness Verdict`.
+- Execution-detail fields such as scope, assumptions, dependencies, estimates, and technical notes should be deferred to engineering stage-gated details unless explicitly requested.
 - Use `schemas/*.schema.json` to validate JSON-shaped artifact payloads.
 - DoR enforcement schemas define:
   - `business_context`
