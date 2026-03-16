@@ -54,14 +54,18 @@ Use this skill as the user-facing entry point: parse intent, choose internal cap
 - decide
 - validate
 - recover
-4. Select capability chain from `docs/operating-system/routing-table.md` and `docs/operating-system/capability-catalog.md`.
-5. In Repo-Aware Mode, inspect the attached repo for guidance and templates that may override bundle defaults before executing capability steps.
-6. Execute capability steps with internal hat handoffs using `docs/operating-system/handoff-contract.md`.
-7. Apply shared question and decision logic:
+4. Set output detail level:
+- `business_default` for initial `Mission`, `Signal`, `Epic`, `Feature`, and `Story` artifacts
+- `design_behavior` when the task is design-focused
+- `engineering_detail` only when the user explicitly asks for implementation detail or the task is `de-risk`, `validate`, engineering planning, or code review
+5. Select capability chain from `docs/operating-system/routing-table.md` and `docs/operating-system/capability-catalog.md`.
+6. In Repo-Aware Mode, inspect the attached repo for guidance and templates that may override bundle defaults before executing capability steps.
+7. Execute capability steps with internal hat handoffs using `docs/operating-system/handoff-contract.md`.
+8. Apply shared question and decision logic:
 - Ask the 10 core questions from `references/core-question-set.md`.
 - If conflict/uncertainty blocks progress, run `references/decision-framework.md`.
-8. Enforce output contract from `references/output-contracts.md`.
-9. Validate readiness and grounding:
+9. Enforce output contract from `references/output-contracts.md`.
+10. Validate readiness and grounding:
 - If source coverage is insufficient, return `Needs Refinement` with `Missing Sources`.
 - Keep output request-scoped (no extra artifact types).
 
@@ -71,8 +75,11 @@ Use this skill as the user-facing entry point: parse intent, choose internal cap
 - Include `Source References`.
 - Include `Readiness Verdict` and required failure fields when applicable.
 - Enforce repo mode behavior:
-  - Repo-Aware Mode must include concrete repository citations.
+  - Repo-Aware Mode should use repo context for correctness when needed.
+  - Repo-Aware Mode should include concrete repository citations only for `engineering_detail` outputs or when the user explicitly asks for implementation detail.
   - Generic Mode must avoid repo-specific claims.
+- Default `Mission`, `Signal`, `Epic`, `Feature`, and `Story` outputs to business-first detail.
+- Do not surface architecture, service, code, rollout, or dependency detail in early artifacts unless the active detail level is `engineering_detail`.
 
 ## Failure/Refinement Behavior
 - Return `Needs Refinement` when:

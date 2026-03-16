@@ -19,9 +19,10 @@ Use this as a compatibility alias of `7hats-product`.
 ## Workflow
 1. Treat the request as `7hats-product` behavior.
 2. In Repo-Aware Mode, inspect the attached repo for guidance and templates that override bundle defaults.
-3. Generate request-scoped artifact using repo-local template contracts first and bundle defaults second.
-4. Apply readiness and grounding checks.
-5. Return output under the same contract as `7hats-product`.
+3. Default initial backlog artifacts to business-first detail and use repo context silently unless implementation detail is explicitly requested or required by the task.
+4. Generate request-scoped artifact using repo-local template contracts first and bundle defaults second.
+5. Apply readiness and grounding checks.
+6. Return output under the same contract as `7hats-product`.
 
 ## Output Contract
 - Match `7hats-product` output contract exactly.

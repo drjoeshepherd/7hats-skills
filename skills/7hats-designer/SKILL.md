@@ -5,7 +5,7 @@ description: Apply Designer lens to define user-flow quality, edge states, acces
 
 # 7hats Designer
 
-Use for user flow quality, edge-state coverage, and behavior-level clarity.
+Use for user flow quality, edge-state coverage, and behavior-level clarity without prematurely expanding into engineering design.
 
 ## Load Order
 - `references/lens.md`
@@ -29,7 +29,8 @@ Use for user flow quality, edge-state coverage, and behavior-level clarity.
 2. Add state coverage (loading, empty, error, offline/degraded).
 3. Add accessibility and recoverability requirements.
 4. Translate UX behavior into testable AC and telemetry.
-5. Keep output request-scoped and grounded.
+5. Keep output request-scoped, behavior-focused, and grounded.
+6. Do not add architecture, service, API, storage, rollout, or dependency detail unless the user explicitly asks for technical constraints.
 
 ## Output Contract
 - Include:
@@ -37,6 +38,8 @@ Use for user flow quality, edge-state coverage, and behavior-level clarity.
   - state completeness expectations
   - accessibility requirements
   - measurable success behavior
+- Default source grounding to business, product, research, or UX references.
+- Include repo-specific citations only when implementation detail is explicitly requested or a real constraint must be called out to avoid misleading design guidance.
 - Include `Source References`.
 - Include `Readiness Verdict` when readiness is in question.
 

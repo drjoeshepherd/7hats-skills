@@ -16,10 +16,21 @@ Set mode:
 ## Repo-Aware Mode Requirements
 1. Ground behavior claims in concrete repo evidence.
 2. Read relevant repo guidance, templates, docs, and code paths before writing implementation-impact details.
-3. Tailor output to real components, dependencies, constraints, and artifact formats found in repo.
+3. Use repo context to avoid contradictions and to tailor output when implementation detail is actually needed.
 4. Prefer attached-repo guidance and templates when they exist; treat bundle templates as fallback defaults.
-5. Include concrete file citations in `Source References`.
+5. Include concrete file citations in `Source References` only when the user asks for implementation detail, or when the task is implementation-oriented (`de-risk`, `validate`, engineering planning, code review).
 6. Do not use "same as X" assumptions without validation.
+
+## Output Detail Policy
+- Repo-aware mode does not mean every output should expose repo-level detail.
+- Default early backlog artifacts to business-first detail even when repo context is available.
+- Repo context may be used internally for correctness without being surfaced in the output.
+- Surface repo paths, service names, architecture notes, implementation dependencies, and code citations only when:
+  - the user explicitly requests repo-aware or implementation detail
+  - the current task is `de-risk`, `validate`, engineering planning, or code review
+  - implementation facts are required to prevent a misleading artifact
+- Design-stage outputs should stay behavior-focused unless technical constraints are explicitly requested.
+- Engineering-stage outputs may include repo-specific detail by default because implementation risk is the point of the task.
 
 ## Repo Guidance And Template Precedence
 When an attached repo is available, every skill must first search for repo-local guidance that can override or refine bundle defaults. Check, when present:
@@ -38,11 +49,11 @@ Precedence rule:
 3. If request depends on repo facts, return `Readiness Verdict: Needs Refinement` with missing sources.
 
 ## Minimum Citation Rule
-When in Repo-Aware Mode, provide at least:
+When repo-specific detail is required in Repo-Aware Mode, provide at least:
 1. One architecture/service reference.
 2. One implementation/mapping/code reference.
 
-If either is missing, do not mark ready.
+If repo-specific detail is required and either is missing, do not mark ready.
 
 ## Failure Contract
 If grounding is insufficient:
@@ -59,5 +70,6 @@ If grounding is insufficient:
 ## Validation Expectations
 Validation/smoke tests should confirm:
 1. Correct mode detection.
-2. Repo-aware outputs contain concrete citations.
-3. Generic-mode outputs avoid fabricated repo claims.
+2. Repo-aware outputs use repo detail only when the request or task requires it.
+3. Implementation-oriented repo-aware outputs contain concrete citations.
+4. Generic-mode outputs avoid fabricated repo claims.

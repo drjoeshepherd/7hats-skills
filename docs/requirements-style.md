@@ -1,6 +1,6 @@
 # Requirements Style Guide
 
-This guide defines how agents should produce clear, implementation-ready requirements that are directly traceable to business outcomes.
+This guide defines how agents should produce clear, stage-appropriate requirements that are directly traceable to business outcomes.
 
 ## Core Operating Model
 - Work with an owner mindset: translate market inputs and strategy into scoped execution work.
@@ -21,10 +21,13 @@ This guide defines how agents should produce clear, implementation-ready require
 - Keep outputs concise, but make trade-offs and constraints explicit.
 
 ## Grounding Gate (Required)
-- Every story must cite at least 2 concrete repo references:
-  - One architecture/service document (for example under `architecture/*` or `services/*`).
-  - One mapping or implementation reference (for example `mappings/repo-map.md` and/or validated code location).
+- Ground every output in the strongest available business, product, or operational sources for the current stage of work.
 - Add a dedicated `Source References` section in every output.
+- Default early artifacts to business/problem/context grounding, not implementation grounding.
+- Require repo-specific citations only when:
+  - the user explicitly asks for repo-aware or implementation detail
+  - the task is `de-risk`, `validate`, engineering planning, or code review
+  - implementation facts are necessary to avoid a false claim
 - If a required source cannot be found, include `Unknown - needs discovery` and mark readiness as `Needs Refinement`.
 
 ## No-Assumption Rule
@@ -83,11 +86,27 @@ Use this hierarchy for all planning artifacts:
 
 Standalone operational Stories are allowed when no parent Signal or Mission exists. Mark them as `Operational`.
 
+## Detail Level Policy (Required)
+- `Mission`, `Signal`, `Epic`, `Feature`, `Story`, and similar initial backlog artifacts default to business-first detail.
+- Business-first detail includes:
+  - problem framing
+  - business context
+  - user or operator outcomes
+  - requirements and acceptance criteria
+  - constraints stated at a business or product level
+- Do not include repo paths, service names, code citations, architecture notes, implementation dependencies, rollout mechanics, or technical design detail in early artifacts unless:
+  - the user explicitly asks for implementation detail
+  - the current task is `de-risk`, `validate`, engineering planning, or engineering review
+  - the absence of implementation context would make the requirement misleading
+- Repo context may be used internally to avoid contradictions, but should not be surfaced by default in business-first artifacts.
+- Design-stage outputs should focus on behavior, states, accessibility, and measurable interaction quality before implementation shape.
+- Engineering-stage outputs may include architecture, dependency, NFR, rollout, rollback, and repo-specific detail when the task calls for it.
+
 ## Template Precedence (Required)
 - In Repo-Aware Mode, scan the attached repository first for guidance and templates that define required structure, field names, artifact sections, or formatting conventions.
 - When repo-local templates or guidance exist and are relevant, use them as the primary shape for the output.
 - Use this bundle's template library to fill gaps, preserve request-scoped contracts, and provide fallback defaults when the repo does not define an equivalent rule.
-- If repo guidance conflicts with bundle rules, prefer the repo for local formatting and field expectations but still enforce bundle grounding, readiness, and request-scope guardrails.
+- If repo guidance conflicts with bundle rules, prefer the repo for local formatting and field expectations but still enforce bundle grounding, readiness, request-scope guardrails, and the default business-first detail policy.
 
 ## Canonical Templates (Required)
 - Use `docs/templates/README.md` as the default template index when repo-local templates do not override it.
@@ -116,12 +135,13 @@ Standalone operational Stories are allowed when no parent Signal or Mission exis
 - If user asks for a `Signal`, return only the signal artifact.
 - If user asks to break down a Mission/Signal, return only the required series of stories.
 - Include only fields relevant to the requested work item type.
+- Do not auto-append design or engineering sections to early backlog artifacts unless the user asks for them.
 
 ## Mission/Signal Planning Lens (Required)
 - For Mission/Signal outputs, explicitly apply 7 Hats concepts:
   - Product Owner: measurable value and prioritization rationale.
   - Researcher: uncertainty/hypothesis and evidence threshold.
-  - Engineer: primary system constraint and key risks.
+  - Engineer: primary system constraint and key risks at a business-safe level unless engineering detail is explicitly requested.
   - Entrepreneur: bet framing and kill criteria.
 - For Story-only requests, do not force Mission/Signal fields; use hat concepts implicitly for quality.
 
@@ -154,11 +174,16 @@ Standalone operational Stories are allowed when no parent Signal or Mission exis
   - `Missing Sources:` list required when grounding is incomplete
 
 ## Technical Notes Standard
-Capture implementation-impact hints without over-prescribing design:
-- API contract changes (request/response, versioning, auth, error model)
-- Data changes (T-SQL/NoSQL schema, migration/backfill expectations)
-- Azure impact (services, networking, identity, deployment implications)
-- Dependencies and sequencing constraints
+- Treat `Technical Notes` as optional for business-first backlog artifacts.
+- Include technical notes only when:
+  - the user asks for implementation detail
+  - engineering constraints materially affect scope or readiness
+  - the task is `de-risk`, `validate`, or engineering planning
+- When included, capture implementation-impact hints without over-prescribing design:
+  - API contract changes (request/response, versioning, auth, error model)
+  - Data changes (T-SQL/NoSQL schema, migration/backfill expectations)
+  - Azure impact (services, networking, identity, deployment implications)
+  - Dependencies and sequencing constraints
 
 ## NFR Coverage Expectations
 Every non-trivial requirement should include NFR impact across:
@@ -183,7 +208,7 @@ Use this checklist for "treat X like Y" tracking requests:
 ## Self-Score Rubric (Required)
 - Score each output before finalizing.
 - Structure compliance: 30%
-- Repo grounding and citations: 40%
+- Stage-appropriate grounding and citations: 40%
 - Acceptance criteria testability: 20%
 - Clarity and ESL readability: 10%
 - Minimum passing score: 8/10. If lower, return `Needs Refinement` and explain gaps.
