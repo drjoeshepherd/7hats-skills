@@ -44,7 +44,7 @@ Define how human engineers and AI agents collaborate to deliver production-quali
 5. Communicate with evidence
 - Separate verified facts from assumptions and inference.
 - Call out risks, edge cases, and verification gaps early.
-- For structured peer review, use the `7hats-code-review` JSON contract.
+- For structured code review, use the `7hats-code-review` JSON contract.
 
 6. Test and validate
 - Add tests when changes are meaningful.

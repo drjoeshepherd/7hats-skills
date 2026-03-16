@@ -1,4 +1,4 @@
-﻿# Repo Context Gate (v1)
+# Repo Context Gate (v1)
 
 ## Purpose
 Ensure 7hats is context-aware of real code repositories and adapts output quality and specificity accordingly.
@@ -15,10 +15,22 @@ Set mode:
 
 ## Repo-Aware Mode Requirements
 1. Ground behavior claims in concrete repo evidence.
-2. Read relevant docs and code paths before writing implementation-impact details.
-3. Tailor output to real components, dependencies, and constraints found in repo.
-4. Include concrete file citations in `Source References`.
-5. Do not use "same as X" assumptions without validation.
+2. Read relevant repo guidance, templates, docs, and code paths before writing implementation-impact details.
+3. Tailor output to real components, dependencies, constraints, and artifact formats found in repo.
+4. Prefer attached-repo guidance and templates when they exist; treat bundle templates as fallback defaults.
+5. Include concrete file citations in `Source References`.
+6. Do not use "same as X" assumptions without validation.
+
+## Repo Guidance And Template Precedence
+When an attached repo is available, every skill must first search for repo-local guidance that can override or refine bundle defaults. Check, when present:
+1. `AGENTS.md`, contribution guides, engineering handbooks, ADRs, architecture docs, and review charters.
+2. Repo-local artifact templates, backlog conventions, issue forms, PR templates, or docs that define required sections or fields.
+3. Tool-enforced conventions and repeated nearby implementation patterns.
+
+Precedence rule:
+1. Repo-local guidance and templates override bundle defaults when they are explicit and relevant.
+2. Bundle templates remain the fallback baseline when the repo does not define an equivalent requirement.
+3. If repo guidance conflicts internally or is incomplete, surface the conflict and return `Needs Refinement` when it blocks a defensible output.
 
 ## Generic Mode Requirements
 1. Avoid repo-specific implementation claims.

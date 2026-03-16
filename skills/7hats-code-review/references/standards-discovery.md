@@ -9,7 +9,7 @@ Find the strongest available standards in the attached implementation repository
 1. Review-specific instructions:
 - `AGENTS.md`
 - coding standards docs
-- pairing or peer review charters
+- pairing or code review charters
 - repository review policy docs
 - contribution guides
 2. Engineering quality docs:
@@ -51,6 +51,7 @@ Find the strongest available standards in the attached implementation repository
 ## Review Rule
 - Prefer explicit standards over inferred standards.
 - Prefer tool-enforced standards over stylistic preference.
+- If repo-local standards are weak, fall back first to `docs/operating-system/agent-coding-standards.md` and then apply `references/fallback-standards.md` as additive language notes.
 - Adapt stack-specific examples to the target language or framework without forcing literal syntax.
 - Do not invent a rule when no source supports it.
 - If standards are weak, focus findings on correctness, regression risk, safety, and missing validation.

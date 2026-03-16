@@ -11,6 +11,9 @@
     "verdict",
     "summary",
     "applied_standards",
+    "scorecard",
+    "metrics",
+    "human_readable_report",
     "verified_facts",
     "assumptions",
     "findings",
@@ -123,6 +126,212 @@
           },
           "notes": {
             "type": "string"
+          }
+        }
+      }
+    },
+    "scorecard": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "dimensions",
+        "overall_score",
+        "review_confidence",
+        "scoring_notes"
+      ],
+      "properties": {
+        "dimensions": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "dimension",
+              "score",
+              "weight",
+              "evidence_count",
+              "standard_refs",
+              "confidence",
+              "rationale"
+            ],
+            "properties": {
+              "dimension": {
+                "type": "string",
+                "enum": [
+                  "correctness",
+                  "regression_risk",
+                  "test_adequacy",
+                  "security_privacy",
+                  "contract_data_integrity",
+                  "maintainability",
+                  "standards_compliance"
+                ]
+              },
+              "score": {
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "minimum": 0,
+                "maximum": 5
+              },
+              "weight": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 100
+              },
+              "evidence_count": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "standard_refs": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "confidence": {
+                "type": "string",
+                "enum": [
+                  "high",
+                  "medium",
+                  "low"
+                ]
+              },
+              "rationale": {
+                "type": "string",
+                "minLength": 1
+              },
+              "cannot_score_reason": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "overall_score": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 5
+        },
+        "review_confidence": {
+          "type": "string",
+          "enum": [
+            "high",
+            "medium",
+            "low"
+          ]
+        },
+        "scoring_notes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "blocking_findings_count",
+        "non_blocking_findings_count",
+        "findings_by_severity",
+        "standards_coverage_percent",
+        "evidence_coverage_percent"
+      ],
+      "properties": {
+        "blocking_findings_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "non_blocking_findings_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "findings_by_severity": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "critical",
+            "high",
+            "medium",
+            "low"
+          ],
+          "properties": {
+            "critical": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "high": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "medium": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "low": {
+              "type": "integer",
+              "minimum": 0
+            }
+          }
+        },
+        "standards_coverage_percent": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "evidence_coverage_percent": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100
+        }
+      }
+    },
+    "human_readable_report": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "verdict_label",
+        "executive_summary",
+        "top_findings",
+        "score_highlights",
+        "next_actions"
+      ],
+      "properties": {
+        "verdict_label": {
+          "type": "string",
+          "minLength": 1
+        },
+        "executive_summary": {
+          "type": "string",
+          "minLength": 1
+        },
+        "top_findings": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "score_highlights": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "next_actions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
           }
         }
       }

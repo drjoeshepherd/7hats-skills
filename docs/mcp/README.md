@@ -12,4 +12,4 @@ This folder contains durable MCP interface documentation for 7hats.
 
 - `docs/mcp/*` defines external integration contracts.
 - `skills/*` defines internal skill behavior and prompt-layer references.
-- `docs/templates/*` remains the canonical artifact template source of truth.
+- Attached-repo templates and guidance take precedence when available; `docs/templates/*` remains the bundle fallback artifact template source of truth.

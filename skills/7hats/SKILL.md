@@ -55,12 +55,13 @@ Use this skill as the user-facing entry point: parse intent, choose internal cap
 - validate
 - recover
 4. Select capability chain from `docs/operating-system/routing-table.md` and `docs/operating-system/capability-catalog.md`.
-5. Execute capability steps with internal hat handoffs using `docs/operating-system/handoff-contract.md`.
-6. Apply shared question and decision logic:
+5. In Repo-Aware Mode, inspect the attached repo for guidance and templates that may override bundle defaults before executing capability steps.
+6. Execute capability steps with internal hat handoffs using `docs/operating-system/handoff-contract.md`.
+7. Apply shared question and decision logic:
 - Ask the 10 core questions from `references/core-question-set.md`.
 - If conflict/uncertainty blocks progress, run `references/decision-framework.md`.
-7. Enforce output contract from `references/output-contracts.md`.
-8. Validate readiness and grounding:
+8. Enforce output contract from `references/output-contracts.md`.
+9. Validate readiness and grounding:
 - If source coverage is insufficient, return `Needs Refinement` with `Missing Sources`.
 - Keep output request-scoped (no extra artifact types).
 

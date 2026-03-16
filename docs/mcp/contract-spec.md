@@ -1,4 +1,4 @@
-﻿# Plan: MCP Contract Specification For 7hats
+# Plan: MCP Contract Specification For 7hats
 
 ## Objective
 Define a stable, implementation-ready MCP contract so 7hats can be consumed by MCP-capable agents without coupling MCP runtime details into skill content files.
@@ -22,16 +22,16 @@ Out of scope:
 - Purpose: classify request type, intent, and dominant constraint; return deterministic routing with hat and capability metadata.
 
 2. `create_artifact`
-- Purpose: generate one request-scoped artifact using canonical template rules.
+- Purpose: generate one request-scoped artifact using repo-local template rules when available, with bundle templates as fallback.
 
 3. `validate_artifact`
 - Purpose: evaluate artifact content against required fields/contracts.
 
 4. `list_templates`
-- Purpose: list canonical template names, paths, and versions.
+- Purpose: list repo-local override templates when available, plus bundle fallback template names, paths, and versions.
 
 5. `get_template`
-- Purpose: return one canonical template definition by name/version.
+- Purpose: return the strongest applicable template definition by name/version, preferring repo-local overrides over bundle defaults.
 
 ## Artifact Types (v1)
 
@@ -98,6 +98,7 @@ Out of scope:
 - `source_references` (array of string or citation object, optional)
 - `output_format` (enum: `markdown` | `json`, required)
 - `template_version` (string, optional)
+- `template_precedence` (enum, optional: `repo_override_first|bundle_only`)
 - `alias` (string, optional)
 
 Repo-aware citation rule:
@@ -130,6 +131,7 @@ Repo-aware citation rule:
 - `schema_version` (string, optional)
 - `tool_version` (string, optional)
 - `template_version` (string)
+- `template_source` (enum: `repo_override` | `bundle_fallback`)
 - `contract_version` (string)
 
 ### `validate_artifact` request
@@ -139,6 +141,7 @@ Repo-aware citation rule:
 - `repo_mode` (enum: `repo_aware` | `generic`, optional)
 - `intent` (enum, optional)
 - `template_version` (string, optional)
+- `template_precedence` (enum, optional: `repo_override_first|bundle_only`)
 - `expected_artifacts` (array string, optional): named outputs that must be present in content.
 
 ### `validate_artifact` response
@@ -181,6 +184,7 @@ Repo-aware citation rule:
 ### `get_template` request
 - `name` (string, required)
 - `template_version` (string, optional)
+- `template_precedence` (enum, optional: `repo_override_first|bundle_only`)
 
 ### `get_template` response
 - `name`
@@ -212,6 +216,7 @@ Repo-aware citation rule:
 
 1. Skill files remain the human authoring layer.
 2. MCP layer consumes canonical contracts from:
+- attached repo templates/guidance when available
 - `docs/templates/*`
 - `skills/7hats/references/output-contracts.md`
 - `docs/compatibility.md`
@@ -245,4 +250,3 @@ Repo-aware citation rule:
 3. Build MCP server adapter against schema.
 4. Add MCP contract smoke tests in CI.
 5. Publish integration quickstart for client setup.
-

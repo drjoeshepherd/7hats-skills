@@ -1,4 +1,4 @@
-﻿# Capability Catalog (v1)
+# Capability Catalog (v1)
 
 ## Purpose
 Define internal capability skills used by `7hats` so user-facing interaction remains intent-first and problem-first.
@@ -6,7 +6,7 @@ Define internal capability skills used by `7hats` so user-facing interaction rem
 ## Capabilities
 
 1. `7hats-product`
-- Purpose: generate request-scoped artifacts using canonical template contracts.
+- Purpose: generate request-scoped artifacts using repo-aware template contracts, falling back to bundle defaults when the attached repo has no stronger guidance.
 - Typical outputs: Story, Bug, Customer Request, Epic, Feature, Mission, Signal, Design Spec, Research Spec.
 - Internal executor hats: Product Owner primary, with Engineer/Designer/Researcher contributions when required.
 
@@ -36,6 +36,11 @@ Define internal capability skills used by `7hats` so user-facing interaction rem
 - Typical outputs: JSON review findings with severity, evidence, applied standards, testing gaps, and residual risks.
 - Internal executor hats: Engineer primary; Product Owner for contract/regression impact when needed.
 
+## Shared Repo Override Rule
+- In Repo-Aware Mode, every capability must inspect the attached repo for guidance, templates, and conventions before using bundle defaults.
+- Repo-local guidance and template contracts override bundle templates when they are explicit and relevant to the request.
+- Bundle templates remain the fallback baseline when the repo does not define an equivalent artifact shape.
+
 ## Selection Hints
 1. If input is one artifact request with clear type, start with `7hats-product`.
 2. If input is a backlog batch or CSV, start with `7hats-analyze-backlog`.
@@ -59,4 +64,3 @@ Define internal capability skills used by `7hats` so user-facing interaction rem
 
 ## Contract Guardrail
 Capabilities are internal orchestration units. Final output remains request-scoped per `skills/7hats/references/output-contracts.md`.
-

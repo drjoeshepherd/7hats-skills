@@ -1,6 +1,6 @@
 # Marketer Hat Template Source
 
-Use the shared template library as the source of truth:
+In Repo-Aware Mode, inspect the attached repo first for guidance and templates that override bundle defaults. Use the shared template library below as the fallback source of truth:
 
 - `../../../docs/templates/README.md`
 - `../../../docs/templates/backlog/signal.md`

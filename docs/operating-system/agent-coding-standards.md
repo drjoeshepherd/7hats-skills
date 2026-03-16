@@ -55,7 +55,7 @@ For non-trivial implementation work, separate:
 5. Test plan
 6. Verification steps
 
-For peer review output, use the review JSON contract, but preserve the same separation through structured fields rather than prose sections.
+For code review output, use the review JSON contract, but preserve the same separation through structured fields rather than prose sections.
 
 ## 4) Standards Discovery Order
 
@@ -65,7 +65,7 @@ Before implementing or reviewing, search in this order:
 - `AGENTS.md`
 - contribution guides
 - coding standards docs
-- peer review or pairing charters
+- code review or pairing charters
 
 2. Architecture and operating docs
 - service boundaries
@@ -183,11 +183,14 @@ Before finalizing a patch or review:
 - [ ] Tests are added or a defensible reason is documented.
 - [ ] The result is readable, consistent, and maintainable.
 
-## 13) Peer Review Mapping (7hats Code Review)
+## 13) Code Review Mapping (7hats Code Review)
 
-When a structured peer review is requested, use `7hats-code-review` and map the review to these standards as follows:
+When a structured code review is requested, use `7hats-code-review` and map the review to these standards as follows:
 
 - `applied_standards`: every standards source used for the review, marked as `target_repo` or `fallback_bundle`, with explicit or inferred strength and the standards categories it informs
+- `scorecard`: standards-based dimension scores grounded in verified evidence, with confidence and `cannot_score_reason` when evidence is insufficient
+- `metrics`: review coverage and finding counts used to interpret the scorecard
+- `human_readable_report`: executive summary, top findings, score highlights, and next actions rendered from the same review object
 - `verified_facts`: concrete facts observed in code, config, docs, tests, or diff context
 - `assumptions`: bounded assumptions that did not rise to verified facts
 - `findings[].category`: one primary standards category such as correctness, security, testing, maintainability, performance_reliability, contracts_data, architecture, or readability
@@ -204,6 +207,11 @@ Review findings should emphasize:
 4. reliability and operability
 5. missing tests
 6. maintainability and readability
+
+Scoring should remain secondary to findings:
+- never let a strong score offset a blocking finding
+- score only what was actually reviewed and evidenced
+- lower confidence when standards or implementation evidence are weak
 
 ## 14) If You Are Not Sure
 

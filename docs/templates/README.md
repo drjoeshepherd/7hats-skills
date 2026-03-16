@@ -1,6 +1,6 @@
 # Template Library (Source of Truth)
 
-This folder is the canonical template library for all 7 Hats skills.
+This folder is the default template library for all 7 Hats skills when an attached repo does not provide a more specific template or artifact contract.
 
 ## Structure
 
@@ -31,7 +31,8 @@ docs/templates/
 ```
 
 ## Rules
-- All skills should use these templates as the source of truth.
+- All skills should inspect the attached repo first for guidance and templates that override bundle defaults.
+- If no repo-local override exists, these templates are the bundle fallback source of truth.
 - `Mission`, `Signal`, and `User Story` templates are aligned to existing 7 Hats contracts.
 - Other templates are defined using common industry patterns and can be extended safely.
 - Keep output request-scoped to the requested artifact type.

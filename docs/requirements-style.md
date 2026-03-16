@@ -1,4 +1,4 @@
-﻿# Requirements Style Guide
+# Requirements Style Guide
 
 This guide defines how agents should produce clear, implementation-ready requirements that are directly traceable to business outcomes.
 
@@ -83,8 +83,14 @@ Use this hierarchy for all planning artifacts:
 
 Standalone operational Stories are allowed when no parent Signal or Mission exists. Mark them as `Operational`.
 
+## Template Precedence (Required)
+- In Repo-Aware Mode, scan the attached repository first for guidance and templates that define required structure, field names, artifact sections, or formatting conventions.
+- When repo-local templates or guidance exist and are relevant, use them as the primary shape for the output.
+- Use this bundle's template library to fill gaps, preserve request-scoped contracts, and provide fallback defaults when the repo does not define an equivalent rule.
+- If repo guidance conflicts with bundle rules, prefer the repo for local formatting and field expectations but still enforce bundle grounding, readiness, and request-scope guardrails.
+
 ## Canonical Templates (Required)
-- Use `docs/templates/README.md` as the template index.
+- Use `docs/templates/README.md` as the default template index when repo-local templates do not override it.
 - Canonical backlog templates:
   - `docs/templates/backlog/mission.md`
   - `docs/templates/backlog/signal.md`
@@ -96,7 +102,7 @@ Standalone operational Stories are allowed when no parent Signal or Mission exis
 - Canonical spec templates:
   - `docs/templates/specs/design-spec.md`
   - `docs/templates/specs/research-spec.md`
-- Skill-specific template references must defer to this library (single source of truth).
+- Skill-specific template references must defer to this library as the bundle fallback source of truth.
 
 ## Work Item Separation Rules (Required)
 - `Mission`, `Signal`, and `Story` are different backlog levels and must not be merged in one artifact unless explicitly requested.
@@ -181,5 +187,3 @@ Use this checklist for "treat X like Y" tracking requests:
 - Acceptance criteria testability: 20%
 - Clarity and ESL readability: 10%
 - Minimum passing score: 8/10. If lower, return `Needs Refinement` and explain gaps.
-
-

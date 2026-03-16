@@ -1,4 +1,4 @@
-﻿# 7 Hats Skill Bundle
+# 7 Hats Skill Bundle
 
 Intent-first TPM skill system for Codex.
 
@@ -68,8 +68,9 @@ Outputs are always request-scoped:
 ## Repo Context Behavior
 
 The system auto-detects execution context:
-- `Repo-Aware Mode`: when a real code repo is attached; responses must cite real files and align to actual architecture/code.
+- `Repo-Aware Mode`: when a real code repo is attached; responses must cite real files, align to actual architecture/code, and prefer repo-local guidance/templates over bundle defaults.
 - `Generic Mode`: when no repo is attached; speculative implementation details are avoided and readiness may be `Needs Refinement`.
+- All skills first scan the attached repo for guidance and templates that may override bundle defaults, then fall back to this bundle when the repo has no stronger guidance.
 - `7hats-code-review` first scans the attached repo for standards in Repo-Aware Mode and falls back to this bundle's baseline review standards when none are found.
 
 ## MCP

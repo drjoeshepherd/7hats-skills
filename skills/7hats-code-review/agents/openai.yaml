@@ -1,4 +1,4 @@
 version: 1
 display_name: 7hats Code Review
-short_description: Repo-aware code review skill that discovers standards and returns findings in a strict JSON contract.
-default_prompt: Use 7hats-code-review to review code changes against repo standards, falling back to the 7hats bundle baseline when no target-repo standards are available, and return JSON only.
+short_description: Repo-aware code review skill that discovers standards and returns findings, scores, and a readable report in a strict JSON contract.
+default_prompt: Use 7hats-code-review to review code changes against repo standards. If repo-local standards are weak, use docs/operating-system/agent-coding-standards.md as the fallback baseline and references/fallback-standards.md only as additive language extensions, then return JSON only with findings, scorecard, metrics, and a human-readable report.

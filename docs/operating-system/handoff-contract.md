@@ -1,4 +1,4 @@
-﻿# Cross-Hat Handoff Contract (v2)
+# Cross-Hat Handoff Contract (v2)
 
 ## Purpose
 Define a standard internal packet for capability-skill execution handoffs across hats.
@@ -16,7 +16,9 @@ Define a standard internal packet for capability-skill execution handoffs across
   "context_summary": "one paragraph max",
   "constraints": ["deadline: 2026-04-15", "no schema break"],
   "required_outputs": ["dependency_map", "failure_modes", "rollback_notes"],
-  "source_refs": ["services/payments/README.md", "mappings/repo-map.md"]
+  "source_refs": ["services/payments/README.md", "mappings/repo-map.md"],
+  "repo_overrides": [".github/PULL_REQUEST_TEMPLATE.md", "docs/backlog/story-template.md"],
+  "template_strategy": "prefer_repo_local_then_bundle_fallback"
 }
 ```
 
@@ -33,14 +35,17 @@ Define a standard internal packet for capability-skill execution handoffs across
 ## Optional Fields
 - `constraints`
 - `source_refs`
+- `repo_overrides`
+- `template_strategy`
 - `confidence`
 - `deadline`
 
 ## Handoff Rules
 1. Handoffs are internal orchestration details, not user-facing commands.
 2. Each handoff must have a clear reason and expected contribution.
-3. Receiving hat must return a receipt summary before final merge.
-4. Final user output remains one request-scoped artifact type.
+3. Sending hat must pass along any discovered repo-local guidance or template overrides when they affect output shape.
+4. Receiving hat must return a receipt summary before final merge.
+5. Final user output remains one request-scoped artifact type.
 
 ## Receipt Structure
 - `handoff_result`: accepted | partial | blocked

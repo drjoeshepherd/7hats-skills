@@ -1,4 +1,4 @@
 version: 1
 display_name: 7hats Product
 short_description: Template-driven Product Owner skill for stories, missions, signals, and related backlog/spec outputs.
-default_prompt: Use 7hats-product to generate one requested artifact type from canonical templates with measurable outcomes, clear scope, and readiness checks.
+default_prompt: Use 7hats-product to generate one requested artifact type by first inspecting the attached repo for guidance and templates that override bundle defaults, then falling back to bundle templates with measurable outcomes, clear scope, and readiness checks.
