@@ -33,7 +33,7 @@ $checks = @(
   @{
     Name = "Epic"
     Path = "backlog\epic.md"
-    Required = @("Problem/Opportunity Statement", "Business Outcome", "In Scope", "Out of Scope", "Success Metrics")
+     Required = @("Title", "Description", "Context", "Acceptance Criteria", "Readiness Verdict", "Source References", "In Scope", "Out of Scope", "Success Metrics", "Dependencies", "Risks", "Milestones / Story Breakdown Strategy", "Failed Gates", "Missing Sources")
   },
   @{
     Name = "User Story"
@@ -91,7 +91,7 @@ $checks = @(
   @{
     Name = "Customer Request"
     Path = "backlog\customer-request.md"
-    Required = @("Tenant Context", "Scope", "Out of Scope", "Acceptance Criteria", "Source References")
+     Required = @("Title", "Description", "Context", "Acceptance Criteria", "Readiness Verdict", "Source References", "Scope", "Out of Scope", "Assumptions", "Dependencies", "Estimate", "Priority", "QA Evidence", "Technical Notes", "Failed Gates", "Missing Sources")
   }
 )
 
